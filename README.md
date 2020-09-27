@@ -5,8 +5,8 @@ Front end view for Patient Intake interface for Medical Practice Management
 Roster:   
 Front End: Nicole, Vibhu  
 API: Akassh  
-Database Access: Karan, Sai
-
+Database Access: Karan, Sai  
+Product Owner: Shared by all members
 
 # Far Vision
 For medical practices, who need an efficient and simple way of recording new/returning patient information during check-in, the AccessMyHealth is the ideal patient intake application that makes filling out information quick and seamless.
