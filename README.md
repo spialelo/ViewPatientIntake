@@ -2,15 +2,14 @@
 Front end view for Patient Intake interface for Medical Practice Management
 
 # Group 5 - Patient Intake
-Roster: 
-Front End: Nicole, Vibhu
-API: Akassh
+Roster:   
+Front End: Nicole, Vibhu  
+API: Akassh  
 Database Access: Karan, Sai
 
 
-
 # Far Vision
-For medical practices, who need an efficient and simple way of recording new/returning patient information during check-in, the PatientCheckIn(or whatever name we give our product) is the ideal patient intake application that makes filling out information quick and seamless.
+For medical practices, who need an efficient and simple way of recording new/returning patient information during check-in, the AccessMyHealth is the ideal patient intake application that makes filling out information quick and seamless.
 
 
 # Near Vision
@@ -18,10 +17,15 @@ For a user to provide their basic information prior to check in and be availble 
 
 
 # Stakeholders
-Medical practice staff
-Doctor
-Nurse
+Medical practice staff\
+Doctor\
+Nurse\
 Patient
 
+# Personas
+[James Smith](https://drive.google.com/file/d/1cGKDNvef0ZmQCP76FLWihW8ewtTkc-I_/view?usp=sharing)  
+[Sofia Lopez](https://drive.google.com/file/d/1vvbVNg83sSq4T5aP4O6OIvz_54jFLLmZ/view?usp=sharing)  
+3rd Person
+
 # Product Backlog
-Pivotal Tracker https://www.pivotaltracker.com/n/projects/2464715
+[Pivotal Tracker: User Stories & Backlog](https://www.pivotaltracker.com/n/projects/2464715)
