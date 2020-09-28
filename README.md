@@ -31,3 +31,14 @@ Patient
 
 # Product Backlog
 [Pivotal Tracker: User Stories & Backlog](https://www.pivotaltracker.com/n/projects/2464715)
+
+# Team Activity
+Estimated points for the initial user story, 'Enter basic patient information' and tentatively estimated the remaining product backlog items. We also had a meeting with Patient Portal team to see where they are and possibly would require of us.
+
+# Ratings
+[Criteria Ratings](https://docs.google.com/document/d/1fH2fVPTGSiJhJsvj68yQIPKVj98-9eoI0KZSLk1gPH4/edit?usp=sharing)
+
+
+
+
+
