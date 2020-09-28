@@ -25,8 +25,9 @@ Patient
 # Personas
 [James Smith](https://drive.google.com/file/d/1cGKDNvef0ZmQCP76FLWihW8ewtTkc-I_/view?usp=sharing)  
 [Sofia Lopez](https://drive.google.com/file/d/1vvbVNg83sSq4T5aP4O6OIvz_54jFLLmZ/view?usp=sharing)  
-[George Paul](https://drive.google.com/file/d/1WptYRm4qtiFtLFnoLXJ2Ci7wZF0QWQ1h/view?usp=sharing)
-[Ayumi Hamasaki](https://drive.google.com/file/d/17sAeAK3VI1QRJgPRrA4gnJ3lX4V19heX/view?usp=sharing)
+[George Paul](https://drive.google.com/file/d/1WptYRm4qtiFtLFnoLXJ2Ci7wZF0QWQ1h/view?usp=sharing)  
+[Ayumi Hamasaki](https://drive.google.com/file/d/17sAeAK3VI1QRJgPRrA4gnJ3lX4V19heX/view?usp=sharing)  
+[Joan Perez](https://drive.google.com/file/d/1yW1fiPa9kSHAL72MDTyl3cUKfxa22HNq/view?usp=sharing)
 
 # Product Backlog
 [Pivotal Tracker: User Stories & Backlog](https://www.pivotaltracker.com/n/projects/2464715)
