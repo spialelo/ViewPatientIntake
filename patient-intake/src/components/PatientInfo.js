@@ -37,11 +37,11 @@ class PatientInfo extends React.Component {
                     </label>
                     <label>
                       Last Name:
-                      <input type="text" value={this.state.value} onChange={this.handleChange} />
+                      <input type="text" />
                     </label>
                     <label>
                       Email Address:
-                      <input type="text" value={this.state.value} onChange={this.handleChange} />
+                      <input type="text" />
                     </label>
                     <input type="submit" value="Submit" />
                   </form>
