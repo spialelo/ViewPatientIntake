@@ -14,8 +14,8 @@ class Button extends React.Component {
     render() {
         return(
             <div>
-                <button to={`${this.props.link}`}>{`${this.props.label}`}</button>
-                {/*<Link to={`${this.props.link}`}>{`${this.props.label}`}</Link>*/}
+                {/*<button to={`${this.props.link}`}>{`${this.props.label}`}</button>*/}
+                <Link to={`${this.props.link}`}>{`${this.props.label}`}</Link>
             </div>
             );
     }

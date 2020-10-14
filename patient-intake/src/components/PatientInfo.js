@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
@@ -29,7 +29,7 @@ class PatientInfo extends React.Component {
     render() {
         return(
             <div>
-                <h1>PatientInfo</h1>
+                <h1>PatientInfo - Nick</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                       First Name:
@@ -56,5 +56,5 @@ PatientInfo.propTypes = {
     link: PropTypes.string.isRequired,
 };
 
-export default PatientInfo;
+export default withRouter(PatientInfo);
 

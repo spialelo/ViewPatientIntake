@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
 import Home from './components/Home.js'
 import PatientInfo from './components/PatientInfo.js'
 import logo from './logo.svg';
@@ -22,19 +22,9 @@ export default function App() {
           Learn React
         </a>
       </header>*/}
-  <Router>
   <Switch>
   <Route
       exact
-      path="/"
-      render={() => (
-        <div>
-          <Home />
-          {/*<PatientInfo />*/}
-        </div>
-      )}
-    />
-  <Route
       path="/dashboard"
       render={() => (
         <div>
@@ -46,15 +36,17 @@ export default function App() {
       )}
     />
     <Route
-      path="/PatientInfo"
-      render={() => (
-        <div>
-          <PatientInfo />
-        </div>
-      )}
+      exact
+      path="/patient-info"
+      component={withRouter(PatientInfo)}
+    />
+    <Route
+      exact
+      path="/"
+      component={Home}
     />
     </Switch>
-    </Router>
+
   </div>
   );
 }
