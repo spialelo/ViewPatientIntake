@@ -4,6 +4,7 @@ import axios from 'axios';
 import Home from './components/Home.js'
 import PatientInfo from './components/PatientInfo.js'
 import EmergencyContact from './components/EmergencyContact.js'
+import ReviewPage from './components/ReviewPage.js'
 import logo from './logo.svg';
 import './App.css';
 
@@ -48,6 +49,11 @@ export default function App() {
       exact
       path="/emergency-contact"
       component={withRouter(EmergencyContact)}
+    />
+    <Route
+      exact
+      path="/review-page"
+      component={withRouter(ReviewPage)}
     />
     <Route
       exact

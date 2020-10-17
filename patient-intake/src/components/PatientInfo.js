@@ -15,10 +15,11 @@ class PatientInfo extends React.Component {
                 midname: '',
                 email: ''
             }
+            // additional fields will be added: DOB, physical address
         }
         
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleNext = this.handleNext.bind(this);
         // this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
     
@@ -32,13 +33,13 @@ class PatientInfo extends React.Component {
         this.setState({patient});
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
+    handleNext(e) {
+        e.preventDefault();
         const patientFile = this.state.patient;
-        console.log(`Patient: ${patientFile.fname} ${patientFile.lname}. Email Address: ${patientFile.email}`);
+        // Change input submit to Link and style like button
         // Pass this component's state onto the next component/fields for user to fill in
         this.props.history.push({ 
-            pathname: '/emergency-contact',
+            pathname: '/review-page',
             state: this.state
         });
     }
@@ -88,7 +89,7 @@ class PatientInfo extends React.Component {
                     </label>
                     <br/>
                     <br/>
-                    <input type="submit" value="Submit" onClick={e => this.handleSubmit(e)} />
+                    <input type="submit" value="Next >>" onClick={e => this.handleNext(e)} />
                   </form>
             </div>
             );

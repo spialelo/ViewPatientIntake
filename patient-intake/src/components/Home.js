@@ -13,7 +13,9 @@ class Home extends React.Component {
                 </header>
                 <h1>Welcome</h1>
                 <p>Patient Check-in</p>
-                <Button label="Check In" link="/patient-info" />
+                <Button label="Begin Check In" link="/patient-info" />
+                <br/>
+                <br/>
             </div>
         );
     }
