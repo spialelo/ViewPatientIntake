@@ -24,7 +24,6 @@ class PatientInfo extends React.Component {
     
     
     handleChange(e) {
-        console.log("method called");
         const patient = Object.assign({}, this.state.patient);
         const target = e.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -35,10 +34,11 @@ class PatientInfo extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(`Patient: ${this.state.fname} ${this.state.lname}. Email Address: ${this.state.email}`);
+        const patientFile = this.state.patient;
+        console.log(`Patient: ${patientFile.fname} ${patientFile.lname}. Email Address: ${patientFile.email}`);
         // Pass this component's state onto the next component/fields for user to fill in
         this.props.history.push({ 
-            pathname: '/emergency-conact',
+            pathname: '/emergency-contact',
             state: this.state
         });
     }
