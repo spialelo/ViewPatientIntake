@@ -13,7 +13,10 @@ class PatientInfo extends React.Component {
                 fname: '',
                 lname: '',
                 midname: '',
-                email: ''
+                email: '',
+                city: '',
+                state: '',
+                zip: ''
             }
             // additional fields will be added: DOB, physical address
         }
@@ -65,33 +68,62 @@ class PatientInfo extends React.Component {
     
     render() {
         return(
+            <form onSubmit={this.handleSubmit}>
             <div>
-                <h1>PatientInfo</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                      First Name:
-                      <input type="text" name="fname" value={this.state.fname} onChange={this.handleChange} />
-                    </label>
+                <h1>Patient Information</h1>
+                <div className="form-row">
+                    <div className="col-md-4 mb-3">
+                        <label className="col-form-label">
+                          First Name:
+                          </label>
+                          <input type="text" className="form-control" name="fname" placeholder="First Name" value={this.state.fname} onChange={this.handleChange} />
+                    </div>
+
+                    <div className="col-md-4 mb-3">
+                        <label className="col-form-label">
+                          Middle Name/Initial (optional):
+                          </label>
+                          <input type="text" className="form-control" name="midname" placeholder="Middle Name" value={this.state.midname} onChange={this.handleChange} />
+                    </div>
+                    
+                    <div className="col-md-4 mb-3">
+                        <label className="col-form-label">
+                          Last Name:
+                          </label>
+                          <input type="text" className="form-control" name="lname" placeholder="Last Name" value={this.state.lname} onChange={this.handleChange} />
+                    </div>
+                </div>
+                
+                <div className="form-row">
+                    <div className="col-md-6 mb-3">
+                      <label>City</label>
+                      <input type="text" className="form-control" name="city" placeholder="City" value={this.state.city} onChange={this.handleChange} />
+                    </div>
+                    <div className="col-md-3 mb-3">
+                      <label>State</label>
+                      <input type="text" className="form-control" name="state" placeholder="State" value={this.state.state} onChange={this.handleChange} />
+                    </div>
+                    <div className="col-md-3 mb-3">
+                      <label>Zip</label>
+                      <input type="text" className="form-control" name="zip" placeholder="Zip" value={this.state.zip} onChange={this.handleChange} />
+                    </div>
+                  </div>
+                
+                <div className="form-row">
+                    <div className="col-md-4 mb-3">
+                        <label className="col-form-label">
+                          Email Address:
+                         </label>
+                         <input type="text" className="form-control" name="email" placeholder="me@example.com" value={this.state.email} onChange={this.handleChange} />
+                     </div>
+                </div>
                     <br/>
-                    <label>
-                      Middle Name/Initial (optional):
-                      <input type="text" name="midname" value={this.state.midname} onChange={this.handleChange} />
-                    </label>
                     <br/>
-                    <label>
-                      Last Name:
-                      <input type="text" name="lname" value={this.state.lname} onChange={this.handleChange} />
-                    </label>
-                    <br/>
-                    <label>
-                      Email Address:
-                      <input type="text" name="email" value={this.state.email} onChange={this.handleChange} />
-                    </label>
-                    <br/>
-                    <br/>
-                    <input type="submit" value="Next >>" onClick={e => this.handleNext(e)} />
-                  </form>
-            </div>
+
+                    <input type="submit" className="btn btn-primary" value="Next >>" onClick={e => this.handleNext(e)} />
+
+                </div>
+            </form>
             );
     }
 }

@@ -44,18 +44,31 @@ class ReviewPage extends React.Component {
     
     render () {
         let currState = this.state.patient
+        let patientName = currState.fname + ' ' + currState.lname;
         return (
-                <div>Blah
-                    <br/>
-                    <br/>
-                    Final Review Page of Patient Information
-                    <br/>
-                    {currState.fname && <p>Patient Name: {currState.fname} {currState.lname}</p>}
-                    <br/>
-                    {currState.email && <p>Email Address: {currState.email}</p>}
-                    <br/>
-                    <input type="submit" value="Submit" onClick={e => this.handleSubmit(e)} />
+            
+            <form>
+            <h4>Final Review Page of Patient Information</h4>
+              <div className="form-group row">
+                <label for="staticEmail" className="col-sm-2 col-form-label">Patient's Name: </label>
+                { currState.fname && 
+                <div className="col-sm-10">
+                  <input type="text" readonly className="form-control-plaintext" id="staticEmail" value={patientName} />
+                </div> }
+              </div>
+              <div className="form-group row">
+                <label for="staticEmail" className="col-sm-2 col-form-label">Email: </label>
+                {currState.email && 
+                <div className="col-sm-10">
+                  <input type="text" readonly className="form-control-plaintext" id="staticEmail" value={currState.email} />
                 </div>
+                }
+              </div>
+              <br/>
+              <div className="col-sm-10">
+                    <input type="submit" className="btn btn-primary" value="Submit" onClick={e => this.handleSubmit(e)} />
+                </div>
+            </form>
             );
     }
     
