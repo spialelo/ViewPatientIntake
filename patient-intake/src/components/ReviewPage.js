@@ -10,7 +10,9 @@ class ReviewPage extends React.Component {
         super(props);
         
         this.state = {
-            patient: ''
+            patient: '',
+            checkInComplete: false
+            
         }
         
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,7 +35,19 @@ class ReviewPage extends React.Component {
             state: this.state
         });
         
-        
+
+      axios({
+        method: 'post',
+        url: "https://web.njit.edu/~as2757/ControlPatientIntake/api.php",
+        headers: { 'content-type': 'application/json' },
+        data: this.state.patient
+      })
+        .then(result => {
+          this.setState({
+            checkInComplete: true
+          })
+        })
+        .catch(error => this.setState({ error: error.message }));
         // Organize compiled data in a data structure that our API is looking for
         
         // successful status completion; if checkInComplete, navigate to "Check-in Complete" page
