@@ -15,7 +15,7 @@ class Button extends React.Component {
         return(
             <div>
                 {/*<button to={`${this.props.link}`}>{`${this.props.label}`}</button>*/}
-                <Link className="btn btn-primary" to={`${this.props.link}`}>{`${this.props.label}`}</Link>
+                <a className="btn btn-primary" href={`${this.props.link}`}>{`${this.props.label}`}</a>
             </div>
             );
     }
