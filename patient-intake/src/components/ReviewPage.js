@@ -32,18 +32,22 @@ class ReviewPage extends React.Component {
         
         let prepData = {};
         prepData.data = this.state.patient;
-        prepData.token = 'nope';
+        prepData.token = '';
         // needs to be put in an .env file or auth file to hide from public; remove before pushing commits
         prepData.type = 'SPIE';
         
         const jsonPrepData = JSON.parse(JSON.stringify(prepData));
+        const proxy = 'https://cors-anywhere.herokuapp.com/'; // CORS Access-Control-Allow-Origin issue
+        const url = 'https://web.njit.edu/~as2757/ControlPatientIntake/api.php';
+        
+        const proxyPlusURL = proxy+url;
 
         console.log(jsonPrepData);
 
-
+      // https://cors-anywhere.herokuapp.com
       axios({
         method: 'post',
-        url: "https://web.njit.edu/~as2757/ControlPatientIntake/api.php",
+        url: proxyPlusURL,
         headers: { 
           'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
           'Access-Control-Allow-Origin': '*'
