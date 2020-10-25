@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
+// import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
 import Button from './Button.js';
 import logo from '../logo.svg';
 import '../App.css';
