@@ -32,34 +32,38 @@ class ReviewPage extends React.Component {
         
         let prepData = {};
         prepData.data = this.state.patient;
-        prepData.token = ''; // needs to be put in an .env file or auth file- hide from public
+        prepData.token = 'nope';
+        // needs to be put in an .env file or auth file to hide from public; remove before pushing commits
         prepData.type = 'SPIE';
         
-        
-        
-        const jsonPrepData = JSON.stringify(prepData);
-        // Change input submit to Link and style like button
-        // Pass this component's state onto the next component/fields for user to fill in
+        const jsonPrepData = JSON.parse(JSON.stringify(prepData));
+
         console.log(jsonPrepData);
-        this.props.history.push({ 
-            pathname: '/',
-            state: this.state
-        });
-        
+
 
       axios({
         method: 'post',
         url: "https://web.njit.edu/~as2757/ControlPatientIntake/api.php",
-        headers: { 'content-type': 'application/json' },
+        headers: { 
+          'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+          'Access-Control-Allow-Origin': '*'
+        },
+        crossdomain: true,
         data: jsonPrepData
       })
         .then(result => {
+          console.log(result);
           this.setState({
             checkInComplete: true
-          })
+          }, () => {
+              this.props.history.push({ 
+                pathname: '/',
+                state: this.state
+            });
+          });
+            
         })
         .catch(error => this.setState({ error: error.message }));
-        // Organize compiled data in a data structure that our API is looking for
         
         // successful status completion; if checkInComplete, navigate to "Check-in Complete" page
         // update state with checkInComplete: true / false

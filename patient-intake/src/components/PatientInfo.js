@@ -81,9 +81,9 @@ class PatientInfo extends React.Component {
         return(
           <div>
             <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><Link to="/patient-info">Patient Information</Link></li>
+              <ol className="breadcrumb">
+                <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
+                <li className="breadcrumb-item"><Link to="/patient-info">Patient Information</Link></li>
               </ol>
             </nav>
             <form onSubmit={this.handleSubmit}>
@@ -200,10 +200,10 @@ class PatientInfo extends React.Component {
 }
 
 
-PatientInfo.propTypes = {
-    label: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-};
+// PatientInfo.propTypes = {
+//     label: PropTypes.string.isRequired,
+//     link: PropTypes.string.isRequired,
+// };
 
 export default PatientInfo;
 
