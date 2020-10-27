@@ -18,7 +18,12 @@ class EmergencyContact extends React.Component {
     
     componentDidMount() {
         const prevState = this.props ? this.props.location.state : Object.assign({});
-        this.setState({patient: Object.assign({}, prevState.patient)});
+        Object.keys(prevState).forEach((key) => {
+            if(Object.keys(prevState[key])) {
+                this.setState({[key]: Object.assign({}, prevState[key])});
+            }
+            this.setState({[key]: prevState[key]});
+        });
     }
     
     handleChange(e) {
