@@ -4,24 +4,20 @@ import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-rou
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-
 class ReviewPage extends React.Component {
     
     constructor(props) {
         super(props);
         
         this.state = {
-            patient: '',
+            patient: {},
             checkInComplete: false
-            
         }
         
         this.handleSubmit = this.handleSubmit.bind(this);
-        
     }
     
     componentDidMount() {
-        // console.log(this.props);
         const prevState = this.props ? this.props.location.state : Object.assign({});
         this.setState({patient: Object.assign({}, prevState.patient)});
     }
@@ -32,137 +28,145 @@ class ReviewPage extends React.Component {
         
         let prepData = {};
         prepData.data = this.state.patient;
-        prepData.token = '';
-        // needs to be put in an .env file or auth file to hide from public; remove before pushing commits
-        prepData.type = 'SPIE';
         
-        const jsonPrepData = JSON.parse(JSON.stringify(prepData));
-        const proxy = 'https://cors-anywhere.herokuapp.com/'; // CORS Access-Control-Allow-Origin issue
-        const url = 'https://web.njit.edu/~as2757/ControlPatientIntake/api.php';
+        // Private info/keys in .env for safekeeping and added to .gitignore
+        prepData.token = process.env.REACT_APP_GROUP5_TOKEN;
+        prepData.type = process.env.REACT_APP_TYPE;
         
+
+        const jsonPrepData = JSON.stringify(prepData);
+        const proxy = 'https://cors-anywhere.herokuapp.com/'; // Address CORS Access-Control-Allow-Origin issue
+        const url = process.env.REACT_APP_API_PATH;
         const proxyPlusURL = proxy+url;
 
         console.log(jsonPrepData);
 
-      // https://cors-anywhere.herokuapp.com
-      axios({
-        method: 'post',
-        url: proxyPlusURL,
-        headers: { 
-          'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-          'Access-Control-Allow-Origin': '*'
-        },
-        crossdomain: true,
-        data: jsonPrepData
-      })
-        .then(result => {
-          console.log(result);
-          this.setState({
-            checkInComplete: true
-          }, () => {
-              this.props.history.push({ 
-                pathname: '/',
-                state: this.state
-            });
-          });
-            
+        axios({
+          method: 'post',
+          url: proxyPlusURL,
+          headers: { 
+            'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+            'Access-Control-Allow-Origin': '*'
+          },
+          crossdomain: true,
+          data: jsonPrepData
         })
-        .catch(error => this.setState({ error: error.message }));
-        
-        // successful status completion; if checkInComplete, navigate to "Check-in Complete" page
-        // update state with checkInComplete: true / false
-
+          .then(result => {
+            this.setState({
+              checkInComplete: true
+            }, () => {
+              console.log(this.state);
+                this.props.history.push({ 
+                  pathname: '/thank-you',
+                  state: this.state
+              });
+            });
+              
+          })
+          .catch(error => this.setState({ error: error.message }));
     }
-    
+
     
     render () {
-        let currState = this.state.patient
+        
+        let currState =  Object.keys(this.state.patient).length > 1 ?  this.state.patient : undefined;
+        
+        if (currState === undefined) {
+          return <h3>Loading</h3>;
+        }
+        
         let patientName = currState.patient_first_name + ' ' + (currState.patient_middle_name ? currState.patient_middle_name + ' ' : '') + currState.patient_last_name;
         
         return (
-            
-            <form>
+          <div>
+            <nav aria-label="breadcrumb">
+              <ol className="breadcrumb">
+                <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
+                <li className="breadcrumb-item"><Link to="/review-page">Review Information</Link></li>
+              </ol>
+            </nav>
+          <form>
             <h4>Final Review Page of Patient Information</h4>
               <div className="form-group row">
-                <label for="staticEmail" className="col-sm-2 col-form-label">Patient's Name: </label>
+                <label htmlFor="staticName" className="col-sm-2 col-form-label">Patient's Name: </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticName" value={ currState.patient_first_name ? patientName : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label for="staticEmail" className="col-sm-2 col-form-label">Email: </label>
+                <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Email: </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticEmail" value={currState.patient_emailid ? currState.patient_emailid : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-              <label for="staticEmail" className="col-sm-2 col-form-label">Phone Number: </label>
+              <label htmlFor="staticPhone" className="col-sm-2 col-form-label">Phone Number: </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticPhone" value={currState.patient_contact_number ?  currState.patient_contact_number : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label for="staticEmail" className="col-sm-2 col-form-label">Social Security Number(SSN): </label>
+                <label htmlFor="staticSSN" className="col-sm-2 col-form-label">Social Security Number(SSN): </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticSSN" value={currState.patient_ssn ? currState.patient_ssn : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label for="staticEmail" className="col-sm-2 col-form-label">Date of Birth (DOB): </label>
+                <label htmlFor="staticDOB" className="col-sm-2 col-form-label">Date of Birth (DOB): </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticDOB" value={currState.patient_dob ? currState.patient_dob : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label for="staticEmail" className="col-sm-2 col-form-label">Address Line 1: </label>
+                <label htmlFor="staticAddr1" className="col-sm-2 col-form-label">Address Line 1: </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticAddr1" value={currState.patient_address_line_1 ? currState.patient_address_line_1 : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label for="staticEmail" className="col-sm-2 col-form-label">Address Line 2: </label>
+                <label htmlFor="staticAddr2" className="col-sm-2 col-form-label">Address Line 2: </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticAddr2" value={currState.patient_address_line_2 ? currState.patient_address_line_2 : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label for="staticEmail" className="col-sm-2 col-form-label">City: </label>
+                <label htmlFor="staticCity" className="col-sm-2 col-form-label">City: </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticCity" value={currState.patient_address_city ? currState.patient_address_city : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label for="staticEmail" className="col-sm-2 col-form-label">State: </label>
+                <label htmlFor="staticState" className="col-sm-2 col-form-label">State: </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticState" value={currState.patient_address_state ? currState.patient_address_state : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label for="staticEmail" className="col-sm-2 col-form-label">Zip Code: </label>
+                <label htmlFor="staticZip" className="col-sm-2 col-form-label">Zip Code: </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticZip" value={currState.patient_zip_code ? currState.patient_zip_code : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label for="staticEmail" className="col-sm-2 col-form-label">Insureance ID Number: </label>
+                <label htmlFor="staticInsurID" className="col-sm-2 col-form-label">Insureance ID Number: </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticInsurID" value={currState.patient_insurance_id ? currState.patient_insurance_id : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label for="staticEmail" className="col-sm-2 col-form-label">Emergency Contact: </label>
+                <label htmlFor="staticEmergCont" className="col-sm-2 col-form-label">Emergency Contact: </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticEmergCont" value={currState.patient_emergency_contact_name ? currState.patient_emergency_contact_name : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label for="staticEmail" className="col-sm-2 col-form-label">Emergency Contact Relationship: </label>
+                <label htmlFor="staticEmergContRel" className="col-sm-2 col-form-label">Emergency Contact Relationship: </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticEmergContRel" value={currState.patient_emergency_contact_relationship ? currState.patient_emergency_contact_relationship : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label for="staticEmail" className="col-sm-2 col-form-label">Emergency Contact Number: </label>
+                <label htmlFor="staticEmergContNum" className="col-sm-2 col-form-label">Emergency Contact Number: </label>
                 <div className="col-sm-10">
                   <input type="text" readonly className="form-control-plaintext" id="staticEmergContNum" value={currState.patient_emergency_contact_number ? currState.patient_emergency_contact_number : 'N/A'} />
                 </div>
@@ -172,11 +176,9 @@ class ReviewPage extends React.Component {
                     <input type="submit" className="btn btn-primary" value="Submit" onClick={e => this.handleSubmit(e)} />
                 </div>
             </form>
+            </div>
             );
     }
-    
-    
 }
-
 
 export default ReviewPage;
