@@ -32,19 +32,16 @@ class ReviewPage extends React.Component {
         const patientFile = this.state.patient;
         
         let prepData = {};
-        prepData.data = this.state.patient;
+        prepData.Data = this.state.patient;
         
-        // Private info/keys in .env for safekeeping and added to .gitignore
-        prepData.token = process.env.REACT_APP_GROUP5_TOKEN;
-        prepData.type = process.env.REACT_APP_TYPE;
+        // Private info/keys isn .env for safekeeping and added to .gitignore
+        prepData.Token = process.env.REACT_APP_GROUP5_TOKEN;
+        prepData.Type = process.env.REACT_APP_TYPE;
         
-
         const jsonPrepData = JSON.stringify(prepData);
         const proxy = 'https://cors-anywhere.herokuapp.com/'; // Address CORS Access-Control-Allow-Origin issue
         const url = process.env.REACT_APP_API_PATH;
-        const proxyPlusURL = proxy+url;
-
-        console.log(jsonPrepData);
+        const proxyPlusURL = proxy+url
 
         axios({
           method: 'post',
@@ -54,19 +51,24 @@ class ReviewPage extends React.Component {
             'Access-Control-Allow-Origin': '*'
           },
           crossdomain: true,
-          data: jsonPrepData
+          data: prepData
         })
-          .then(result => {
-            this.setState({
-              checkInComplete: true
-            }, () => {
-              console.log(this.state);
-                this.props.history.push({ 
-                  pathname: '/thank-you',
-                  state: this.state
-              });
-            });
+          .then(res => {
+            console.log("---> response.data");
+            console.log(res.data);
+            if(res.status === 200) {
               
+              this.setState({
+                  checkInComplete: true,
+                  returnedFullRes: res,
+                  resStatus: res.status
+                }, () => {
+                    this.props.history.push({ 
+                      pathname: '/thank-you',
+                      state: this.state
+                  });
+                });
+            }
           })
           .catch(error => this.setState({ error: error.message }));
     }
@@ -95,85 +97,85 @@ class ReviewPage extends React.Component {
               <div className="form-group row">
                 <label htmlFor="staticName" className="col-sm-2 col-form-label">Patient's Name: </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticName" value={ currState.patient_first_name ? patientName : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticName" value={ currState.patient_first_name ? patientName : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
                 <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Email: </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticEmail" value={currState.patient_emailid ? currState.patient_emailid : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticEmail" value={currState.patient_emailid ? currState.patient_emailid : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
               <label htmlFor="staticPhone" className="col-sm-2 col-form-label">Phone Number: </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticPhone" value={currState.patient_contact_number ?  currState.patient_contact_number : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticPhone" value={currState.patient_contact_number ?  currState.patient_contact_number : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
                 <label htmlFor="staticSSN" className="col-sm-2 col-form-label">Social Security Number(SSN): </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticSSN" value={currState.patient_ssn ? currState.patient_ssn : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticSSN" value={currState.patient_ssn ? currState.patient_ssn : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
                 <label htmlFor="staticDOB" className="col-sm-2 col-form-label">Date of Birth (DOB): </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticDOB" value={currState.patient_dob ? currState.patient_dob : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticDOB" value={currState.patient_dob ? currState.patient_dob : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
                 <label htmlFor="staticAddr1" className="col-sm-2 col-form-label">Address Line 1: </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticAddr1" value={currState.patient_address_line_1 ? currState.patient_address_line_1 : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticAddr1" value={currState.patient_address_line_1 ? currState.patient_address_line_1 : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
                 <label htmlFor="staticAddr2" className="col-sm-2 col-form-label">Address Line 2: </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticAddr2" value={currState.patient_address_line_2 ? currState.patient_address_line_2 : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticAddr2" value={currState.patient_address_line_2 ? currState.patient_address_line_2 : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
                 <label htmlFor="staticCity" className="col-sm-2 col-form-label">City: </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticCity" value={currState.patient_address_city ? currState.patient_address_city : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticCity" value={currState.patient_address_city ? currState.patient_address_city : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
                 <label htmlFor="staticState" className="col-sm-2 col-form-label">State: </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticState" value={currState.patient_address_state ? currState.patient_address_state : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticState" value={currState.patient_address_state ? currState.patient_address_state : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
                 <label htmlFor="staticZip" className="col-sm-2 col-form-label">Zip Code: </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticZip" value={currState.patient_zip_code ? currState.patient_zip_code : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticZip" value={currState.patient_zip_code ? currState.patient_zip_code : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
                 <label htmlFor="staticInsurID" className="col-sm-2 col-form-label">Insureance ID Number: </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticInsurID" value={currState.patient_insurance_id ? currState.patient_insurance_id : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticInsurID" value={currState.patient_insurance_id ? currState.patient_insurance_id : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
                 <label htmlFor="staticEmergCont" className="col-sm-2 col-form-label">Emergency Contact: </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticEmergCont" value={currState.patient_emergency_contact_name ? currState.patient_emergency_contact_name : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticEmergCont" value={currState.patient_emergency_contact_name ? currState.patient_emergency_contact_name : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
                 <label htmlFor="staticEmergContRel" className="col-sm-2 col-form-label">Emergency Contact Relationship: </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticEmergContRel" value={currState.patient_emergency_contact_relationship ? currState.patient_emergency_contact_relationship : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticEmergContRel" value={currState.patient_emergency_contact_relationship ? currState.patient_emergency_contact_relationship : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
                 <label htmlFor="staticEmergContNum" className="col-sm-2 col-form-label">Emergency Contact Number: </label>
                 <div className="col-sm-10">
-                  <input type="text" readonly className="form-control-plaintext" id="staticEmergContNum" value={currState.patient_emergency_contact_number ? currState.patient_emergency_contact_number : 'N/A'} />
+                  <input type="text" readOnly className="form-control-plaintext" id="staticEmergContNum" value={currState.patient_emergency_contact_number ? currState.patient_emergency_contact_number : 'N/A'} />
                 </div>
               </div>
               <br/>
