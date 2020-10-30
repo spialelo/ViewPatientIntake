@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
+import './custom.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

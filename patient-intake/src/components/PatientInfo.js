@@ -2,7 +2,7 @@ import React from 'react';
 import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
 // import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import axios from 'axios';
+// import Footer from './Footer';
 
 class PatientInfo extends React.Component {
     
@@ -55,15 +55,17 @@ class PatientInfo extends React.Component {
     render() {
         return(
           <div>
-            <nav aria-label="breadcrumb">
+          <header>
+            <nav className="fixed-top" aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
                 <li className="breadcrumb-item"><Link to="/patient-info">Patient Information</Link></li>
               </ol>
             </nav>
-            <form>
-            <div>
+            </header>
+            <main role="main" className="container" style={{paddingTop: 70+'px'}}>
                 <h1>Patient Information</h1>
+                <form>
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
                         <label className="col-form-label">
@@ -88,40 +90,44 @@ class PatientInfo extends React.Component {
                 </div>
                 
                 <div className="form-row">
-                    <div className="col-md-6 mb-3">
+                    <div className="col-md-3 mb-3">
                       <label>Phone Number</label>
-                      <input type="text" className="form-control" name="patient_contact_number" placeholder="Phone Number" value={this.state.patient_contact_number} onChange={this.handleChange} />
+                      <input type="tel" className="form-control" name="patient_contact_number" placeholder="Phone Number" value={this.state.patient_contact_number} onChange={this.handleChange} />
                     </div>
                      <div className="col-md-4 mb-3">
-                        <label className="col-form-label">
+                        <label>
                           Email Address:
                          </label>
-                         <input type="text" className="form-control" name="patient_emailid" placeholder="me@example.com" value={this.state.patient_emailid} onChange={this.handleChange} />
+                         <input type="email" className="form-control" name="patient_emailid" placeholder="me@example.com" value={this.state.patient_emailid} onChange={this.handleChange} />
                      </div>
-                    <div className="col-md-6 mb-3">
+                    <div className="col-md-4 mb-3">
                       <label>Sex</label>
                       <input type="text" className="form-control" name="patient_sex" placeholder="Sex" value={this.state.patient_sex} onChange={this.handleChange} />
                     </div>
+                </div>
+                
+                
+                <div className="form-row">
                     <div className="col-md-6 mb-3">
                       <label>SSN</label>
                       <input type="text" className="form-control" name="patient_ssn" placeholder="SSN" value={this.state.patient_ssn} onChange={this.handleChange} />
                     </div>
-                    <div className="col-md-6 mb-3">
+                    <div className="col-md-3 mb-3">
                       <label>Date of Birth</label>
-                      <input type="text" className="form-control" name="patient_dob" placeholder="YYYY-MM-DD" value={this.state.patient_dob} onChange={this.handleChange} />
+                      <input type="date" className="form-control" name="patient_dob" placeholder="YYYY-MM-DD" value={this.state.patient_dob} onChange={this.handleChange} />
                     </div>
                     <div className="col-md-6 mb-3">
                       <label>Insurance ID#</label>
                       <input type="text" className="form-control" name="patient_insurance_id" placeholder="Insurance ID#" value={this.state.patient_insurance_id} onChange={this.handleChange} />
                     </div>
-                </div>    
+                </div>
                 
                 <div className="form-row">
                     <div className="col-md-6 mb-3">
                       <label>Address Line 1</label>
                       <input type="text" className="form-control" name="patient_address_line_1" placeholder="Address" value={this.state.patient_address_line_1} onChange={this.handleChange} />
                     </div>
-                    <div className="col-md-3 mb-3">
+                    <div className="col-md-6 mb-3">
                       <label>Address Line 2</label>
                       <input type="text" className="form-control" name="patient_address_line_2" placeholder="Building/Apt/Suite" value={this.state.patient_address_line_2} onChange={this.handleChange} />
                     </div>
@@ -146,8 +152,8 @@ class PatientInfo extends React.Component {
                     <input type="submit" className="btn btn-primary" value="Next >>" onClick={e => this.handleNext(e)} />
                     <br/>
                     <br/>
-                </div>
-            </form>
+                    </form>
+                </main>
             </div>
             );
     }

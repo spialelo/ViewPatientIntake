@@ -92,6 +92,7 @@ class ReviewPage extends React.Component {
                 <li className="breadcrumb-item"><Link to="/review-page">Review Information</Link></li>
               </ol>
             </nav>
+          <div className="container">
           <form>
             <h4>Final Review Page of Patient Information</h4>
               <div className="form-group row">
@@ -183,6 +184,7 @@ class ReviewPage extends React.Component {
                     <input type="submit" className="btn btn-primary" value="Submit" onClick={e => this.handleSubmit(e)} />
                 </div>
             </form>
+            </div>
             </div>
             );
     }

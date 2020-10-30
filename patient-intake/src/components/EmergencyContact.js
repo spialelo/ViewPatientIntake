@@ -49,15 +49,17 @@ class EmergencyContact extends React.Component {
     render () {
         return (
             <div>
-            <nav aria-label="breadcrumb">
-              <ol className="breadcrumb">
-                <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
-                <li className="breadcrumb-item"><Link to="/emergency-contact">Emergency Contact Information</Link></li>
-              </ol>
-            </nav>
-            <form>
-            <div>
+            <header>
+                <nav className="fixed-top" aria-label="breadcrumb">
+                  <ol className="breadcrumb">
+                    <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
+                    <li className="breadcrumb-item"><Link to="/emergency-contact">Emergency Contact Information</Link></li>
+                  </ol>
+                </nav>
+            </header>
+            <main role="main" className="container">
                 <h1>Emergency Contact Information</h1>
+                <form>
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
                         <label className="col-form-label">
@@ -69,7 +71,7 @@ class EmergencyContact extends React.Component {
                         <label className="col-form-label">
                           Emergency Contact Number:
                          </label>
-                         <input type="text" className="form-control" name="patient_emergency_contact_number" placeholder="1234567890" value={this.state.patient_emergency_contact_number} onChange={this.handleChange} />
+                         <input type="tel" className="form-control" name="patient_emergency_contact_number" placeholder="1234567890" value={this.state.patient_emergency_contact_number} onChange={this.handleChange} />
                      </div>
                      <div className="col-md-4 mb-3">
                         <label className="col-form-label">
@@ -83,8 +85,9 @@ class EmergencyContact extends React.Component {
                     <input type="submit" className="btn btn-primary" value="Next >>" onClick={e => this.handleNext(e)} />
                     <br/>
                     <br/>
-                </div>
-            </form>
+                    </form>
+                </main>
+            
             </div>
             );
     }
