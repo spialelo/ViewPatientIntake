@@ -7,8 +7,8 @@ class Footer extends React.Component {
 render() {
     return(
         <footer className="footer">
-            <div class="container">
-            <span class="text-muted">&copy; Patient Intake 2020</span>
+            <div className="container">
+            <span className="text-muted">&copy; Patient Intake 2020</span>
           </div>
         </footer>
         );

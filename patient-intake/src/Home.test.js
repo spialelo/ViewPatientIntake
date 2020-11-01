@@ -1,8 +1,11 @@
 import React from 'react';
-import { render,screen,cleanup } from '@testing-library/react';
+import { render,screen,cleanup, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+//@testing-library/jest-dom
 import Home from './components/Home';
 
-
+// Nested components within a component will be difficult to test.
+// Test the nested component's functionality separately.
 describe('Testing features related to the Home component', () => {
 
 
@@ -41,10 +44,18 @@ describe('Testing features related to the Home component', () => {
             cleanup();
         });
         
-        test('Button is there', () => {
-          const buttonLinkElement = screen.getByText(/Begin check in/i);
-          expect(buttonLinkElement).toBeInTheDocument();
+        test('Check-in intro paragraph present', () => {
+          const introCopy = screen.getByText(/identification/i);
+          expect(introCopy).toBeInTheDocument();
         });
+        
+        
+        test('Button is on home page', () => {
+          const linkElement = screen.getByTestId('begin-button');
+          expect(linkElement).toBeInTheDocument();
+        });
+        
+        
      });
 
   });

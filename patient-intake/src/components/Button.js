@@ -24,7 +24,7 @@ class Button extends React.Component {
             <div>
                 {/*<button  className="btn btn-primary" onClick={e => this.handleClick(e, this.props.link)}>{`${this.props.label}`}</button>*/}
                 <Router>
-                    <Link className="btn btn-primary" to={`${this.props.link}`}>{`${this.props.label}`}</Link>
+                    <Link data-testid={`${this.props.propid}`} className="btn btn-primary" to={`${this.props.link}`}>{`${this.props.label}`}</Link>
                 </Router>
             </div>
             );
@@ -35,6 +35,7 @@ class Button extends React.Component {
 Button.propTypes = {
     label: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
+    propid: PropTypes.string
 };
 
 export default Button;

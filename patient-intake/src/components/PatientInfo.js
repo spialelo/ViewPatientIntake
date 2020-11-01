@@ -64,7 +64,7 @@ class PatientInfo extends React.Component {
             </nav>
             </header>
             <main role="main" className="container" style={{paddingTop: 70+'px'}}>
-                <h1>Patient Information</h1>
+                <h1 data-testid="patient-info">Patient Information</h1>
                 <form>
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
