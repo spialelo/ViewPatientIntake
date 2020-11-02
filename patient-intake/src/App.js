@@ -1,14 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
+// import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
-import Home from './components/Home.js'
-import PatientInfo from './components/PatientInfo.js'
-import EmergencyContact from './components/EmergencyContact.js'
-import ReviewPage from './components/ReviewPage.js'
+import Home from './components/Home.js';
+import PatientInfo from './components/PatientInfo.js';
+import EmergencyContact from './components/EmergencyContact.js';
+import ReviewPage from './components/ReviewPage.js';
+import ThankYou from './components/ThankYou.js'
 import logo from './logo.svg';
 import './App.css';
 
-const API_PATH = "https://web.njit.edu/~as2757/ControlPatientIntake/api.php";
+const API_PATH = process.env.REACT_APP_API_PATH;
 
 export default function App() {
   return (
@@ -43,17 +45,22 @@ export default function App() {
     <Route
       exact
       path="/patient-info"
-      component={withRouter(PatientInfo)}
+      component={PatientInfo}
     />
     <Route
       exact
       path="/emergency-contact"
-      component={withRouter(EmergencyContact)}
+      component={EmergencyContact}
     />
     <Route
       exact
       path="/review-page"
-      component={withRouter(ReviewPage)}
+      component={ReviewPage}
+    />
+    <Route
+      exact
+      path="/thank-you"
+      component={ThankYou}
     />
     <Route
       exact

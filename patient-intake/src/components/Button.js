@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
+// import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
@@ -7,15 +8,24 @@ class Button extends React.Component {
     
     constructor(props) {
         super(props);
+        this.handleClick = this.handleClick.bind(this);
     }
     
     
+    handleClick(e, link) {
+        e.preventDefault();
+        this.props.history.push({ 
+          pathname: link
+      });
+    }
     
     render() {
         return(
             <div>
-                {/*<button to={`${this.props.link}`}>{`${this.props.label}`}</button>*/}
-                <Link className="btn btn-primary" to={`${this.props.link}`}>{`${this.props.label}`}</Link>
+                {/*<button  className="btn btn-primary" onClick={e => this.handleClick(e, this.props.link)}>{`${this.props.label}`}</button>*/}
+                <Router>
+                    <Link data-testid={`${this.props.propid}`} className="btn btn-primary" to={`${this.props.link}`}>{`${this.props.label}`}</Link>
+                </Router>
             </div>
             );
     }
@@ -25,6 +35,7 @@ class Button extends React.Component {
 Button.propTypes = {
     label: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
+    propid: PropTypes.string
 };
 
 export default Button;
