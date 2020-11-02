@@ -1,12 +1,12 @@
 import React from 'react';
 import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
-// import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
-import Home from './components/Home.js';
-import PatientInfo from './components/PatientInfo.js';
-import EmergencyContact from './components/EmergencyContact.js';
-import ReviewPage from './components/ReviewPage.js';
-import ThankYou from './components/ThankYou.js'
+import Home from './components/Home';
+import PatientInfo from './components/PatientInfo';
+import EmergencyContact from './components/EmergencyContact';
+import MedicalHistory from './components/MedicalHistory';
+import ReviewPage from './components/ReviewPage';
+import ThankYou from './components/ThankYou'
 import logo from './logo.svg';
 import './App.css';
 
@@ -51,6 +51,11 @@ export default function App() {
       exact
       path="/emergency-contact"
       component={EmergencyContact}
+    />
+    <Route
+      exact
+      path="/medical-history"
+      component={MedicalHistory}
     />
     <Route
       exact
