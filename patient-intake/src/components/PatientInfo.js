@@ -25,10 +25,13 @@ class PatientInfo extends React.Component {
                 patient_address_state: '',
                 patient_zip_code: '',
                 patient_insurance_id: ''
-            }
+            },
+            errors: {},
+            buttonEnabled: false
         }
         
         this.handleChange = this.handleChange.bind(this);
+        this.handleValidation = this.handleValidation.bind(this);
         this.handleNext = this.handleNext.bind(this);
     }
     
@@ -39,6 +42,52 @@ class PatientInfo extends React.Component {
         const name = target.name;
         patient[name] = value;
         this.setState({patient});
+    }
+    
+    handleValidation(e) {
+      const inputTarget = e.target;
+      const errors = this.state.errors;
+      const key = inputTarget.name;
+      
+      switch (key) {
+        case 'patient_first_name':
+          // code
+          if(inputTarget.value === '') {
+            errors[key] = "Field is required.";
+          } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
+              errors[key] = "Maximum length of 32 characters.";
+          } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 32) {
+              delete errors[key];
+          }
+          this.setState({errors});
+          break;
+        case 'patient_middle_name':
+          // code
+          if (inputTarget.value !== '' && inputTarget.value.length > 32) {
+              errors[key] = "Maximum length of 32 characters.";
+          } else if (errors[key] && (inputTarget.value === '' || inputTarget.value.length <= 32)) {
+              delete errors[key];
+          }
+          
+          this.setState({errors});
+          break;
+        case 'patient_last_name':
+          // code
+          if(inputTarget.value === '') {
+            errors[key] = "Field is required.";
+          } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
+              errors[key] = "Maximum length of 32 characters.";
+          } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 32) {
+              delete errors[key];
+          }
+          
+          this.setState({errors});
+          break;
+        
+        default:
+          // code
+      }
+      
     }
 
     handleNext(e) {
@@ -71,21 +120,48 @@ class PatientInfo extends React.Component {
                         <label className="col-form-label">
                           First Name:
                           </label>
-                          <input type="text" className="form-control" name="patient_first_name" placeholder="First Name" value={this.state.patient_first_name} onChange={this.handleChange} />
+                          <input
+                            type="text" 
+                            className="form-control" 
+                            name="patient_first_name" 
+                            placeholder="First Name" 
+                            value={this.state.patient_first_name} 
+                            onChange={this.handleChange} 
+                            onBlur={this.handleValidation}
+                            required/>
+                            {this.state.errors.patient_first_name && 
+                            <div className="invalid-feedback" style={{display: 'block'}}>
+                              {this.state.errors.patient_first_name}
+                            </div>}
                     </div>
 
                     <div className="col-md-4 mb-3">
                         <label className="col-form-label">
                           Middle Name/Initial (optional):
                           </label>
-                          <input type="text" className="form-control" name="patient_middle_name" placeholder="Middle Name" value={this.state.patient_middle_name} onChange={this.handleChange} />
+                          <input type="text" className="form-control" name="patient_middle_name" placeholder="Middle Name" 
+                          value={this.state.patient_middle_name} 
+                          onChange={this.handleChange} 
+                          onBlur={this.handleValidation}/>
+                          {this.state.errors.patient_middle_name && 
+                            <div className="invalid-feedback" style={{display: 'block'}}>
+                              {this.state.errors.patient_middle_name}
+                            </div>}
                     </div>
                     
                     <div className="col-md-4 mb-3">
                         <label className="col-form-label">
                           Last Name:
                           </label>
-                          <input type="text" className="form-control" name="patient_last_name" placeholder="Last Name" value={this.state.patient_last_name} onChange={this.handleChange} />
+                          <input type="text" className="form-control" name="patient_last_name" placeholder="Last Name" 
+                          value={this.state.patient_last_name} 
+                          onChange={this.handleChange} 
+                          onBlur={this.handleValidation}
+                          required/>
+                          {this.state.errors.patient_last_name && 
+                            <div className="invalid-feedback" style={{display: 'block'}}>
+                              {this.state.errors.patient_last_name}
+                            </div>}
                     </div>
                 </div>
                 

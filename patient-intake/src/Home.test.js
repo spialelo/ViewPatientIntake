@@ -1,6 +1,8 @@
 import React from 'react';
 import { render,screen,cleanup, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { createMemoryHistory } from 'history';
+import '@testing-library/jest-dom';
 //@testing-library/jest-dom
 import Home from './components/Home';
 
@@ -53,6 +55,16 @@ describe('Testing features related to the Home component', () => {
         test('Button is on home page', () => {
           const linkElement = screen.getByTestId('begin-button');
           expect(linkElement).toBeInTheDocument();
+        });
+        
+         test.skip('Button click', () => {
+          const linkElement = screen.queryByTestId('begin-button');
+          userEvent.click(linkElement, {button: 0});
+          
+          expect(screen.queryByText(/patient information/i)).toBeInTheDocument();
+          
+        //   const patientPage = await screen.getByText(/patient information/i);
+        //   expect(patientPage).toBeInTheDocument();
         });
         
         
