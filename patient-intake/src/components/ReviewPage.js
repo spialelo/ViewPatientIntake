@@ -125,6 +125,8 @@ class ReviewPage extends React.Component {
                   <input type="text" readOnly className="form-control-plaintext" id="staticDOB" value={currState.patient_dob ? currState.patient_dob : 'N/A'} />
                 </div>
               </div>
+              <hr />
+                <br/>
               <div className="form-group row">
                 <label htmlFor="staticAddr1" className="col-sm-2 col-form-label">Address Line 1: </label>
                 <div className="col-sm-10">
@@ -155,12 +157,16 @@ class ReviewPage extends React.Component {
                   <input type="text" readOnly className="form-control-plaintext" id="staticZip" value={currState.patient_zip_code ? currState.patient_zip_code : 'N/A'} />
                 </div>
               </div>
+              <hr />
+                <br/>
               <div className="form-group row">
                 <label htmlFor="staticInsurID" className="col-sm-2 col-form-label">Insureance ID Number: </label>
                 <div className="col-sm-10">
                   <input type="text" readOnly className="form-control-plaintext" id="staticInsurID" value={currState.patient_insurance_id ? currState.patient_insurance_id : 'N/A'} />
                 </div>
               </div>
+              <hr />
+                <br/>
               <div className="form-group row">
                 <label htmlFor="staticEmergCont" className="col-sm-2 col-form-label">Emergency Contact: </label>
                 <div className="col-sm-10">

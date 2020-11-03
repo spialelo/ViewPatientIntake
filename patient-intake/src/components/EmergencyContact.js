@@ -42,6 +42,17 @@ class EmergencyContact extends React.Component {
       const key = inputTarget.name;
       
       switch (key) {
+          case 'patient_reason_for_visit':
+          // code
+          if(inputTarget.value === '') {
+            errors[key] = "Field is required.";
+          } else if (inputTarget.value !== '' && inputTarget.value.length > 150) {
+              errors[key] = "Maximum length of 150 characters.";
+          } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 150) {
+              delete errors[key];
+          }
+          this.setState({errors});
+          break;
         case 'patient_emergency_contact_name':
           // code
           if(inputTarget.value === '') {
@@ -137,7 +148,8 @@ class EmergencyContact extends React.Component {
         // Change input submit to Link and style like button
         // Pass this component's state onto the next component/fields for user to fill in
         this.props.history.push({ 
-            pathname: '/review-page',
+            pathname: '/medical-history',
+            // pathname: '/review-page',
             state: this.state
         });
     }
@@ -166,7 +178,16 @@ class EmergencyContact extends React.Component {
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
                         <label>Reason for visit</label>
-                        <textarea className="form-control" rows="3"></textarea>
+                        <textarea className="form-control" rows="3" 
+                        name="patient_reason_for_visit"
+                        value={this.state.patient_reason_for_visit}
+                         onChange={this.handleChange}
+                         onBlur={this.handleValidation}
+                        />
+                        {this.state.errors.patient_reason_for_visit && 
+                          <div className="invalid-feedback" style={{display: 'block'}}>
+                            {this.state.errors.patient_reason_for_visit}
+                          </div>}
                     </div>
                 </div>
                 <br/>
@@ -225,6 +246,7 @@ class EmergencyContact extends React.Component {
                 <br/>
                 
                 <h3>Insurance Information</h3>
+                
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
                         <label className="col-form-label">

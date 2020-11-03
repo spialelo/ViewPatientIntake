@@ -11,12 +11,20 @@ class PatientInfo extends React.Component {
             patient: {
             },
             errors: {},
-            buttonEnabled: false
+            buttonDisaabled: false
         }
         
         this.handleChange = this.handleChange.bind(this);
         this.handleValidation = this.handleValidation.bind(this);
         this.handleNext = this.handleNext.bind(this);
+    }
+    
+    componentDidMount() {
+      const { buttonDisaabled } = this.state;
+      let newButtonState = (Object.keys(this.state.patient).length < 1 || Object.keys(this.state.errors).length > 0);
+      
+      this.setState({buttonDisaabled: newButtonState});
+      
     }
     
     handleChange(e) {
@@ -123,6 +131,18 @@ class PatientInfo extends React.Component {
           
           this.setState({errors});
           break;
+        case 'patient_insurance_id':
+          // code
+          if(inputTarget.value === '') {
+            errors[key] = "Field is required.";
+          } else if (inputTarget.value !== '' && inputTarget.value.length > 9) {
+              errors[key] = "Maximum length of 9 characters.";
+          } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 9) {
+              delete errors[key];
+          }
+          
+          this.setState({errors});
+          break;
         case 'patient_address_line_1':
           // code
           if(inputTarget.value === '') {
@@ -185,6 +205,11 @@ class PatientInfo extends React.Component {
           // code
       }
       
+      const { buttonDisaabled } = this.state;
+      let newButtonState = (Object.keys(this.state.patient).length < 1 || Object.keys(this.state.errors).length > 0);
+      
+      this.setState({buttonDisaabled: newButtonState});
+      
     }
 
     handleNext(e) {
@@ -200,7 +225,7 @@ class PatientInfo extends React.Component {
     render() {
       
       let errors = Object.keys(this.state.errors).length > 0;
-      
+      let { buttonDisaabled } = this.state;
       
         return(
           <div>
@@ -338,10 +363,21 @@ class PatientInfo extends React.Component {
                         {this.state.errors.patient_dob}
                       </div>}
                     </div>
+                    {/*
                     <div className="col-md-6 mb-3">
                       <label>Insurance ID#</label>
-                      <input type="text" className="form-control" name="patient_insurance_id" placeholder="Insurance ID#" value={this.state.patient_insurance_id} onChange={this.handleChange} />
+                      <input type="text" className="form-control" name="patient_insurance_id" 
+                      placeholder="Insurance ID#" 
+                      value={this.state.patient_insurance_id} 
+                      onChange={this.handleChange}
+                      onBlur={this.handleValidation}
+                      required />
+                      {this.state.errors.patient_insurance_id && 
+                      <div className="invalid-feedback" style={{display: 'block'}}>
+                        {this.state.errors.patient_insurance_id}
+                      </div>}
                     </div>
+                    */}
                 </div>
                 
                 <div className="form-row">
@@ -464,7 +500,7 @@ class PatientInfo extends React.Component {
                     <br/>
                     <br/>
                     <input type="submit"
-                    disabled={errors}
+                    disabled={buttonDisaabled}
                     className="btn btn-primary"
                     value="Next >>" onClick={e => this.handleNext(e)} />
                     <br/>
@@ -475,11 +511,5 @@ class PatientInfo extends React.Component {
             );
     }
 }
-
-
-// PatientInfo.propTypes = {
-//     label: PropTypes.string.isRequired,
-//     link: PropTypes.string.isRequired,
-// };
 
 export default PatientInfo;
