@@ -8,7 +8,22 @@ class MedicalHistory extends React.Component {
         super(props);
         
         this.state = {
-            patient: {},
+            patient: {
+              patient_drinker: false,
+              patient_currently_pregnant: false,
+              patient_diabetes: false,
+              patient_drinker: false,
+              patient_metal_implants: false,
+              patient_pacemaker: false,
+              patient_smoker: false,
+              family_bleeding_disorder: false,
+              family_cancer: false,
+              family_diabetes: false,
+              family_heart_conditions: false,
+              family_sickle_cell_disease: false,
+              family_stroke: false
+              
+            },
             errors: {}
         }
         
@@ -80,71 +95,68 @@ class MedicalHistory extends React.Component {
                 <h3>Patient Medical History</h3>
                 <div className="form-row">
                     <div className="form-check form-check-inline">
-                      <input className="form-check-input" type="checkbox" id="patient_drinker" name="patient_drinker" />
+                      <input className="form-check-input" type="checkbox" id="patient_drinker" name="patient_drinker" onChange={this.handleChange} />
                       <label className="form-check-label" htmlFor="patient_drinker">Alcohol Drinker</label>
                     </div>
                     <div className="form-check form-check-inline">
-                      <input className="form-check-input" type="checkbox" name="patient_smoker" />
+                      <input className="form-check-input" type="checkbox" name="patient_smoker" onChange={this.handleChange} />
                       <label className="form-check-label">Smoker</label>
                     </div>
                     <div className="form-check form-check-inline">
-                      <input className="form-check-input" type="checkbox" name="patient_currently_pregnant" />
+                      <input className="form-check-input" type="checkbox" name="patient_currently_pregnant" onChange={this.handleChange} />
                       <label className="form-check-label">Currently Pregnant</label>
                     </div>
                     <div className="form-check form-check-inline">
-                      <input className="form-check-input" type="checkbox" name="patient_diabetes" />
+                      <input className="form-check-input" type="checkbox" name="patient_diabetes" onChange={this.handleChange} />
                       <label className="form-check-label">Diabetes (Type I / II)</label>
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="form-check form-check-inline">
-                      <input className="form-check-input" type="checkbox" name="patient_cancer" />
+                      <input className="form-check-input" type="checkbox" name="patient_cancer" onChange={this.handleChange} />
                       <label className="form-check-label">Cancer</label>
                     </div>
                     <div className="form-check form-check-inline">
-                      <input className="form-check-input" type="checkbox" name="patient_metal_implants" />
+                      <input className="form-check-input" type="checkbox" name="patient_metal_implants" onChange={this.handleChange} />
                       <label className="form-check-label">Metal implants</label>
                     </div>
                     <div className="form-check form-check-inline">
-                      <input className="form-check-input" type="checkbox" name="patient_pacemaker" />
+                      <input className="form-check-input" type="checkbox" name="patient_pacemaker" onChange={this.handleChange} />
                       <label className="form-check-label">Pacemaker</label>
                     </div>
                 </div>
                 <br/>
-                <div className="form-row">
-                    <div className="col-md-12 mb-3">
-                        <label>Reason for visit</label>
-                        <textarea className="form-control" rows="3" name="patient_allergies"></textarea>
-                    </div>
-                </div>
+                <br/>
+                <hr />
+                <br/>
                 <br/>
                 
                 <h3>Family Medical History</h3>
                 <div className="form-row">
                     <div className="form-check form-check-inline">
-                      <input className="form-check-input" type="checkbox" name="family_cancer" />
+                      <input className="form-check-input" type="checkbox" name="family_cancer" onChange={this.handleChange} />
                       <label className="form-check-label">Cancer</label>
                     </div>
                     <div className="form-check form-check-inline">
-                      <input className="form-check-input" type="checkbox" name="family_diabetes" />
+                      <input className="form-check-input" type="checkbox" name="family_diabetes" onChange={this.handleChange} />
                       <label className="form-check-label">Diabetes (Type I /II)</label>
                     </div>
                     <div className="form-check form-check-inline">
-                      <input className="form-check-input" type="checkbox" name="family_heart_conditions" />
+                      <input className="form-check-input" type="checkbox" name="family_heart_conditions" onChange={this.handleChange} />
                       <label className="form-check-label">Heart Conditions/Disease</label>
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="form-check form-check-inline">
-                      <input className="form-check-input" type="checkbox" name="family_bleeding_disorder" />
+                      <input className="form-check-input" type="checkbox" name="family_bleeding_disorder" onChange={this.handleChange} />
                       <label className="form-check-label">Blood Disorder (e.g. Hemophilia, Clotting)</label>
                     </div>
                     <div className="form-check form-check-inline">
-                      <input className="form-check-input" type="checkbox" name="family_stroke" />
+                      <input className="form-check-input" type="checkbox" name="family_stroke" onChange={this.handleChange} />
                       <label className="form-check-label">Stroke</label>
                     </div>
                     <div className="form-check form-check-inline">
-                      <input className="form-check-input" type="checkbox" name="family_sickle_cell_disease" />
+                      <input className="form-check-input" type="checkbox" name="family_sickle_cell_disease" onChange={this.handleChange} />
                       <label className="form-check-label">Sickle Cell Disease</label>
                     </div>
                 </div>

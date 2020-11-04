@@ -148,8 +148,8 @@ class EmergencyContact extends React.Component {
         // Change input submit to Link and style like button
         // Pass this component's state onto the next component/fields for user to fill in
         this.props.history.push({ 
-            pathname: '/medical-history',
-            // pathname: '/review-page',
+            // pathname: '/medical-history',
+            pathname: '/review-page',
             state: this.state
         });
     }
@@ -175,7 +175,7 @@ class EmergencyContact extends React.Component {
                 <form>
                 
                 <h3>Reason For Visit</h3>
-                <div className="form-row">
+                {/*<div className="form-row">
                     <div className="col-md-12 mb-3">
                         <label>Reason for visit</label>
                         <textarea className="form-control" rows="3" 
@@ -189,7 +189,7 @@ class EmergencyContact extends React.Component {
                             {this.state.errors.patient_reason_for_visit}
                           </div>}
                     </div>
-                </div>
+                </div>*/}
                 <br/>
                 
                 <h3>Emergency Contact Information</h3>
@@ -247,7 +247,7 @@ class EmergencyContact extends React.Component {
                 
                 <h3>Insurance Information</h3>
                 
-                <div className="form-row">
+                {/*<div className="form-row">
                     <div className="col-md-4 mb-3">
                         <label className="col-form-label">
                           Insurance Company Name:
@@ -312,7 +312,7 @@ class EmergencyContact extends React.Component {
                             {this.state.errors.insurance_group_number}
                           </div>}
                      </div>
-                </div>
+                </div> */}
                     <br/>
                     <br/>
                     <input type="submit" 

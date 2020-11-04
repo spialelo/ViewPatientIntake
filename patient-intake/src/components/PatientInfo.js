@@ -264,7 +264,7 @@ class PatientInfo extends React.Component {
 
                     <div className="col-md-4 mb-3">
                         <label className="col-form-label">
-                          Middle Name/Initial (optional):
+                          Middle Name/Initial <span className="text-muted">(optional)</span>:
                           </label>
                           <input type="text" className="form-control" name="patient_middle_name" placeholder="Middle Name" 
                           value={this.state.patient_middle_name} 
@@ -326,7 +326,7 @@ class PatientInfo extends React.Component {
                       onChange={this.handleChange}
                       onBlur={this.handleValidation}
                       required>
-                        <option value="" selected="selected">Select birth gender</option>
+                        <option value="" defaultValue>Select birth gender</option>
                         <option value="M">Male</option>
                         <option value="F">Female</option>
                       </select>
@@ -363,7 +363,7 @@ class PatientInfo extends React.Component {
                         {this.state.errors.patient_dob}
                       </div>}
                     </div>
-                    {/*
+                    
                     <div className="col-md-6 mb-3">
                       <label>Insurance ID#</label>
                       <input type="text" className="form-control" name="patient_insurance_id" 
@@ -377,7 +377,7 @@ class PatientInfo extends React.Component {
                         {this.state.errors.patient_insurance_id}
                       </div>}
                     </div>
-                    */}
+                    
                 </div>
                 
                 <div className="form-row">
@@ -426,7 +426,7 @@ class PatientInfo extends React.Component {
                       onChange={this.handleChange}
                       onBlur={this.handleValidation}
                       required>
-                        <option value="" selected="selected">Select a State</option>
+                        <option value="" defaultValue>Select a State</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
                         <option value="AZ">Arizona</option>
