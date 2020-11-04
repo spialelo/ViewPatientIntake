@@ -39,7 +39,7 @@ class ThankYou extends React.Component {
                 </header>
                 <br />
                 <h1>Thank you for checking in!</h1>
-                {this.state.checkInComplete && <Button label="Back to homepage >>" link="/" /> }
+                {this.state.checkInComplete && <Button label="Back to homepage &#x2192;" link="/" /> }
                 <br/>
                 <br/>
             </div>

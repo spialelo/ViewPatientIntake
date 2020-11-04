@@ -502,7 +502,7 @@ class PatientInfo extends React.Component {
                     <input type="submit"
                     disabled={buttonDisaabled}
                     className="btn btn-primary"
-                    value="Next >>" onClick={e => this.handleNext(e)} />
+                    value="Next &#x2192;" onClick={e => this.handleNext(e)} />
                     <br/>
                     <br/>
                     </form>

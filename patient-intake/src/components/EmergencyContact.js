@@ -112,6 +112,18 @@ class EmergencyContact extends React.Component {
           
           this.setState({errors});
           break;
+        case 'patient_insurance_id':
+          // code
+          if(inputTarget.value === '') {
+            errors[key] = "Field is required.";
+          } else if (inputTarget.value !== '' && inputTarget.value.length > 9) {
+              errors[key] = "Maximum length of 9 characters.";
+          } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 9) {
+              delete errors[key];
+          }
+          
+          this.setState({errors});
+          break;
         case 'insurance_group_number':
           // code
           if(inputTarget.value === '') {
@@ -193,6 +205,7 @@ class EmergencyContact extends React.Component {
                 <br/>
                 
                 <h3>Emergency Contact Information</h3>
+                <p className="instructions">Please provide the information of the person whom we should contact in case of an emergency.</p>
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
                         <label className="col-form-label">
@@ -246,7 +259,7 @@ class EmergencyContact extends React.Component {
                 <br/>
                 
                 <h3>Insurance Information</h3>
-                
+                <p className="instructions">Please enter the information on your insruance card that corresponds to the fields below.</p>
                 {/*<div className="form-row">
                     <div className="col-md-4 mb-3">
                         <label className="col-form-label">
@@ -280,6 +293,19 @@ class EmergencyContact extends React.Component {
                             {this.state.errors.insurance_contact_number}
                           </div>}
                      </div>
+                      <div className="col-md-6 mb-3">
+                      <label>Insurance ID#</label>
+                      <input type="text" className="form-control" name="patient_insurance_id" 
+                      placeholder="Insurance ID#" 
+                      value={this.state.patient_insurance_id} 
+                      onChange={this.handleChange}
+                      onBlur={this.handleValidation}
+                      required />
+                      {this.state.errors.patient_insurance_id && 
+                      <div className="invalid-feedback" style={{display: 'block'}}>
+                        {this.state.errors.patient_insurance_id}
+                      </div>}
+                    </div>
                      <div className="col-md-4 mb-3">
                         <label className="col-form-label">
                           Insurance Plan Name:
@@ -318,7 +344,7 @@ class EmergencyContact extends React.Component {
                     <input type="submit" 
                     className="btn btn-primary"
                     disabled={errors}
-                    value="Next >>" onClick={e => this.handleNext(e)} />
+                    value="Next &#x2192;" onClick={e => this.handleNext(e)} />
                     <br/>
                     <br/>
                     </form>

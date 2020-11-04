@@ -16,7 +16,7 @@ class Home extends React.Component {
                 <br />
                 <h1>Welcome to Patient Check-In</h1>
                 <p className="lead">Please have your driver's license or a form of identification and your insurance card at hand.</p>
-                <Button propid="begin-button" label="Begin Check In >>" link="/patient-info" />
+                <Button propid="begin-button" label="Begin Check In &#x2192;" link="/patient-info" />
                 <br/>
                 <br/>
                 <Footer />

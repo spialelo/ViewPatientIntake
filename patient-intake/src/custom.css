@@ -16,3 +16,8 @@ h3 {
     background-color: rgba(0, 0, 0, 0.05);
     margin-bottom: 1.25rem;
 }
+
+.instructions {
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}

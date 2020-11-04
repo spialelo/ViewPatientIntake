@@ -93,6 +93,7 @@ class MedicalHistory extends React.Component {
                 <form>
             
                 <h3>Patient Medical History</h3>
+                <p className="instructions">Select all that apply to <strong>you</strong>. If none apply, proceed to the next section.</p>
                 <div className="form-row">
                     <div className="form-check form-check-inline">
                       <input className="form-check-input" type="checkbox" id="patient_drinker" name="patient_drinker" onChange={this.handleChange} />
@@ -127,11 +128,9 @@ class MedicalHistory extends React.Component {
                 </div>
                 <br/>
                 <br/>
-                <hr />
-                <br/>
-                <br/>
                 
                 <h3>Family Medical History</h3>
+                <p className="instructions">Select all that apply to members of <strong>your family</strong>, immediate and extended. If none apply, proceed to the next section.</p>
                 <div className="form-row">
                     <div className="form-check form-check-inline">
                       <input className="form-check-input" type="checkbox" name="family_cancer" onChange={this.handleChange} />
@@ -165,7 +164,7 @@ class MedicalHistory extends React.Component {
                     <input type="submit" 
                     className="btn btn-primary"
                     disabled={errors}
-                    value="Next >>" onClick={e => this.handleNext(e)} />
+                    value="Next &#x2192;" onClick={e => this.handleNext(e)} />
                     <br/>
                     <br/>
                     </form>

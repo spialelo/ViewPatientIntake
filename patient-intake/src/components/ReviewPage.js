@@ -187,7 +187,7 @@ class ReviewPage extends React.Component {
               </div>
               <br/>
               <div className="col-sm-10">
-                    <input type="submit" className="btn btn-primary" value="Submit" onClick={e => this.handleSubmit(e)} />
+                    <input type="submit" className="btn btn-primary" value="Submit 	&#x21EA;" onClick={e => this.handleSubmit(e)} />
                 </div>
             </form>
             </div>
