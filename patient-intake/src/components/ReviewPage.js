@@ -49,7 +49,8 @@ class ReviewPage extends React.Component {
           url: proxyPlusURL,
           headers: { 
             'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'x-requested-with, x-requested-by'
           },
           crossdomain: true,
           data: prepData
