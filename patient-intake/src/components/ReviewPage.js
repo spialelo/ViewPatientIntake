@@ -36,12 +36,14 @@ class ReviewPage extends React.Component {
         
         // Private info/keys isn .env for safekeeping and added to .gitignore
         prepData.Token = process.env.REACT_APP_GROUP5_TOKEN;
-        prepData.Type = process.env.REACT_APP_TYPE_SPIE; //Received PermissionDenied
+        prepData.Type = 'SPIE';
+        // prepData.Type = process.env.REACT_APP_TYPE_SPIE; //Received PermissionDenied
         // prepData.Type = process.env.REACT_APP_TYPE_SPPIMHFHIE; //Received InvalidType
         
         const jsonPrepData = JSON.stringify(prepData);
         const proxy = 'https://cors-anywhere.herokuapp.com/'; // Address CORS Access-Control-Allow-Origin issue
-        const url = process.env.REACT_APP_API_PATH;
+        // const url = process.env.REACT_APP_API_PATH;
+        const url = 'https://web.njit.edu/~as2757/ControlPatientIntake/api.php';
         const proxyPlusURL = proxy+url
 
         axios({
