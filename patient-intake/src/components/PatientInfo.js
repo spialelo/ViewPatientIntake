@@ -9,6 +9,7 @@ class PatientInfo extends React.Component {
         
         this.state = {
             patient: {
+              patient_middle_name: ''
             },
             errors: {},
             buttonDisaabled: false
@@ -364,7 +365,7 @@ class PatientInfo extends React.Component {
                       </div>}
                     </div>
                     
-                    <div className="col-md-6 mb-3">
+                    {/*<div className="col-md-6 mb-3">
                       <label>Insurance ID#</label>
                       <input type="text" className="form-control" name="patient_insurance_id" 
                       placeholder="Insurance ID#" 
@@ -376,7 +377,7 @@ class PatientInfo extends React.Component {
                       <div className="invalid-feedback" style={{display: 'block'}}>
                         {this.state.errors.patient_insurance_id}
                       </div>}
-                    </div>
+                    </div>*/}
                     
                 </div>
                 
