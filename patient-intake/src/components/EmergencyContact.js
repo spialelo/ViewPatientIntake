@@ -187,7 +187,7 @@ class EmergencyContact extends React.Component {
                 <form>
                 
                 <h3>Reason For Visit</h3>
-                <div className="form-row">
+                {/*<div className="form-row">
                     <div className="col-md-12 mb-3">
                         <label>Reason for visit</label>
                         <textarea className="form-control" rows="3" 
@@ -201,7 +201,7 @@ class EmergencyContact extends React.Component {
                             {this.state.errors.patient_reason_for_visit}
                           </div>}
                     </div>
-                </div>
+                </div>*/}
                 <br/>
                 
                 <h3>Emergency Contact Information</h3>

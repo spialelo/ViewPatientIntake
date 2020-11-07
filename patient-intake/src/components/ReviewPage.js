@@ -36,9 +36,9 @@ class ReviewPage extends React.Component {
         
         // Private info/keys isn .env for safekeeping and added to .gitignore
         prepData.Token = process.env.REACT_APP_GROUP5_TOKEN;
-        prepData.Type = 'SPIE';
-        // prepData.Type = process.env.REACT_APP_TYPE_SPIE; //Received PermissionDenied
-        // prepData.Type = process.env.REACT_APP_TYPE_SPPIMHFHIE; //Received InvalidType
+        // prepData.Type = process.env.REACT_APP_TYPE_SPIE; // Only patient information
+        prepData.Type = process.env.REACT_APP_TYPE_SPPIMHFHIE; //All field in one post
+
         
         const jsonPrepData = JSON.stringify(prepData);
         const proxy = 'https://cors-anywhere.herokuapp.com/'; // Address CORS Access-Control-Allow-Origin issue

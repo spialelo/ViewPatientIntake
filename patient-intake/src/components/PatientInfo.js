@@ -9,7 +9,8 @@ class PatientInfo extends React.Component {
         
         this.state = {
             patient: {
-              patient_middle_name: ''
+              patient_middle_name: '',
+              patient_emailid: ''
             },
             errors: {},
             buttonDisaabled: false
@@ -341,7 +342,7 @@ class PatientInfo extends React.Component {
                 
                 <div className="form-row">
                     <div className="col-md-6 mb-3">
-                      <label>SSN</label>
+                      <label>Social Security Number (SSN#)</label>
                       <input type="text" className="form-control" name="patient_ssn" placeholder="SSN" 
                       value={this.state.patient_ssn}
                       onChange={this.handleChange} 

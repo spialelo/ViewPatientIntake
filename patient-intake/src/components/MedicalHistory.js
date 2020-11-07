@@ -9,6 +9,7 @@ class MedicalHistory extends React.Component {
         
         this.state = {
             patient: {
+              patient_allergies: '',
               patient_drinker: false,
               patient_currently_pregnant: false,
               patient_diabetes: false,
@@ -34,13 +35,13 @@ class MedicalHistory extends React.Component {
     
     componentDidMount() {
         // temporarily commented out for testing
-        // const prevState = this.props ? this.props.location.state : Object.assign({});
-        // Object.keys(prevState).forEach((key) => {
-        //     if(Object.keys(prevState[key])) {
-        //         this.setState({[key]: Object.assign({}, prevState[key])});
-        //     }
-        //     this.setState({[key]: prevState[key]});
-        // });
+        const prevState = this.props ? this.props.location.state : Object.assign({});
+        Object.keys(prevState).forEach((key) => {
+            if(Object.keys(prevState[key])) {
+                this.setState({[key]: Object.assign({}, prevState[key])});
+            }
+            this.setState({[key]: prevState[key]});
+        });
     }
     
     handleChange(e) {
