@@ -10,10 +10,14 @@ class MedicalHistory extends React.Component {
         this.state = {
             patient: {
               patient_allergies: '',
+              insurance_pharmacy_network: '', // here until it is removed
               patient_drinker: false,
+              patient_cancer: false,
               patient_currently_pregnant: false,
               patient_diabetes: false,
               patient_drinker: false,
+              patient_high_blood_pressure: false,
+              patient_heart_disease: false,
               patient_metal_implants: false,
               patient_pacemaker: false,
               patient_smoker: false,
@@ -21,9 +25,10 @@ class MedicalHistory extends React.Component {
               family_cancer: false,
               family_diabetes: false,
               family_heart_conditions: false,
+              family_heart_disease: false,
+              family_high_blood_pressure: false,
               family_sickle_cell_disease: false,
               family_stroke: false
-              
             },
             errors: {}
         }
@@ -38,7 +43,7 @@ class MedicalHistory extends React.Component {
         const prevState = this.props ? this.props.location.state : Object.assign({});
         Object.keys(prevState).forEach((key) => {
             if(Object.keys(prevState[key])) {
-                this.setState({[key]: Object.assign({}, prevState[key])});
+                this.setState({patient: Object.assign({}, prevState.patient, this.state.patient)});
             }
             this.setState({[key]: prevState[key]});
         });
@@ -57,13 +62,30 @@ class MedicalHistory extends React.Component {
       const inputTarget = e.target;
       const errors = this.state.errors;
       const key = inputTarget.name;
+      switch (key) {
+          case 'patient_reason_for_visit':
+          // code
+
+            if (inputTarget.value !== '') {
+              let allergies = inputTarget.value;
+              
+              if(allergies.indexOf(',') < 0 && allergies.split(',').length < 1) {
+                  errors[key] = "Please provide a comma separated list of allergies the patient has.";
+              }
+            } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.indexOf(',') >= 0 && inputTarget.value.split(',').length >= 1) {
+                delete errors[key];
+            }
+            this.setState({errors});
+            break;
+          default:
+          //code
+      }
       
     }
 
     handleNext(e) {
         e.preventDefault();
         const patientFile = this.state.patient;
-        // Change input submit to Link and style like button
         // Pass this component's state onto the next component/fields for user to fill in
         this.props.history.push({ 
             pathname: '/review-page',
@@ -74,8 +96,6 @@ class MedicalHistory extends React.Component {
     render () {
         
         let errors = Object.keys(this.state.errors).length > 0;
-        
-        // checkboxes and different type of validation will be needed
         
         return (
             <div>
@@ -127,6 +147,21 @@ class MedicalHistory extends React.Component {
                       <label className="form-check-label">Pacemaker</label>
                     </div>
                 </div>
+                <div className="form-row">
+                    <div className="col-md-12 mb-3">
+                        <label>Allergies</label>
+                        <textarea className="form-control" rows="3" 
+                        name="patient_allergies"
+                        value={this.state.patient_allergies}
+                         onChange={this.handleChange}
+                         onBlur={this.handleValidation}
+                        />
+                        {this.state.errors.patient_allergies && 
+                          <div className="invalid-feedback" style={{display: 'block'}}>
+                            {this.state.errors.patient_allergies}
+                          </div>}
+                    </div>
+                  </div>
                 <br/>
                 <br/>
                 

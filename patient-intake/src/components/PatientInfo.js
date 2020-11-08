@@ -10,7 +10,8 @@ class PatientInfo extends React.Component {
         this.state = {
             patient: {
               patient_middle_name: '',
-              patient_emailid: ''
+              patient_emailid: '',
+              patient_address_line_2: ''
             },
             errors: {},
             buttonDisaabled: false

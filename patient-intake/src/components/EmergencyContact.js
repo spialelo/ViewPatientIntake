@@ -157,11 +157,10 @@ class EmergencyContact extends React.Component {
     handleNext(e) {
         e.preventDefault();
         const patientFile = this.state.patient;
-        // Change input submit to Link and style like button
         // Pass this component's state onto the next component/fields for user to fill in
         this.props.history.push({ 
-            // pathname: '/medical-history',
-            pathname: '/review-page',
+            pathname: '/medical-history',
+            // pathname: '/review-page',
             state: this.state
         });
     }
