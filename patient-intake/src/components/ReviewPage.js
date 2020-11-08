@@ -99,6 +99,7 @@ class ReviewPage extends React.Component {
           <div className="container">
           <form>
             <h4>Final Review Page of Patient Information</h4>
+            <p>Add remaining fields and helpful captions</p>
               <div className="form-group row">
                 <label htmlFor="staticName" className="col-sm-2 col-form-label">Patient's Name: </label>
                 <div className="col-sm-10">
