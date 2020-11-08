@@ -1,8 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
-// import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 
 class Button extends React.Component {
     
@@ -22,7 +20,6 @@ class Button extends React.Component {
     render() {
         return(
             <div>
-                {/*<button  className="btn btn-primary" onClick={e => this.handleClick(e, this.props.link)}>{`${this.props.label}`}</button>*/}
                 <Router>
                     <Link data-testid={`${this.props.propid}`} className="btn btn-primary" to={`${this.props.link}`}>{`${this.props.label}`}</Link>
                 </Router>

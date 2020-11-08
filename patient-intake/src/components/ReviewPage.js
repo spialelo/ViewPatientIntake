@@ -36,11 +36,14 @@ class ReviewPage extends React.Component {
         
         // Private info/keys isn .env for safekeeping and added to .gitignore
         prepData.Token = process.env.REACT_APP_GROUP5_TOKEN;
-        prepData.Type = process.env.REACT_APP_TYPE;
+        // prepData.Type = process.env.REACT_APP_TYPE_SPIE; // Only patient information
+        prepData.Type = process.env.REACT_APP_TYPE_SPPIMHFHIE; //All field in one post
+
         
         const jsonPrepData = JSON.stringify(prepData);
         const proxy = 'https://cors-anywhere.herokuapp.com/'; // Address CORS Access-Control-Allow-Origin issue
-        const url = process.env.REACT_APP_API_PATH;
+        // const url = process.env.REACT_APP_API_PATH;
+        const url = 'https://web.njit.edu/~as2757/ControlPatientIntake/api.php';
         const proxyPlusURL = proxy+url
 
         axios({
@@ -48,7 +51,8 @@ class ReviewPage extends React.Component {
           url: proxyPlusURL,
           headers: { 
             'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'x-requested-with, x-requested-by'
           },
           crossdomain: true,
           data: prepData
@@ -125,6 +129,8 @@ class ReviewPage extends React.Component {
                   <input type="text" readOnly className="form-control-plaintext" id="staticDOB" value={currState.patient_dob ? currState.patient_dob : 'N/A'} />
                 </div>
               </div>
+              <hr />
+                <br/>
               <div className="form-group row">
                 <label htmlFor="staticAddr1" className="col-sm-2 col-form-label">Address Line 1: </label>
                 <div className="col-sm-10">
@@ -155,12 +161,16 @@ class ReviewPage extends React.Component {
                   <input type="text" readOnly className="form-control-plaintext" id="staticZip" value={currState.patient_zip_code ? currState.patient_zip_code : 'N/A'} />
                 </div>
               </div>
+              <hr />
+                <br/>
               <div className="form-group row">
                 <label htmlFor="staticInsurID" className="col-sm-2 col-form-label">Insureance ID Number: </label>
                 <div className="col-sm-10">
                   <input type="text" readOnly className="form-control-plaintext" id="staticInsurID" value={currState.patient_insurance_id ? currState.patient_insurance_id : 'N/A'} />
                 </div>
               </div>
+              <hr />
+                <br/>
               <div className="form-group row">
                 <label htmlFor="staticEmergCont" className="col-sm-2 col-form-label">Emergency Contact: </label>
                 <div className="col-sm-10">
@@ -181,7 +191,7 @@ class ReviewPage extends React.Component {
               </div>
               <br/>
               <div className="col-sm-10">
-                    <input type="submit" className="btn btn-primary" value="Submit" onClick={e => this.handleSubmit(e)} />
+                    <input type="submit" className="btn btn-primary" value="Submit 	&#x21EA;" onClick={e => this.handleSubmit(e)} />
                 </div>
             </form>
             </div>

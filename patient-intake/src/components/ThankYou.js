@@ -1,6 +1,5 @@
 import React from 'react';
 import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
-// import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
 import Button from './Button.js';
 import logo from '../logo.svg';
 import '../App.css';
@@ -40,7 +39,7 @@ class ThankYou extends React.Component {
                 </header>
                 <br />
                 <h1>Thank you for checking in!</h1>
-                {this.state.checkInComplete && <Button label="Back to homepage >>" link="/" /> }
+                {this.state.checkInComplete && <Button label="Back to homepage &#x2192;" link="/" /> }
                 <br/>
                 <br/>
             </div>
