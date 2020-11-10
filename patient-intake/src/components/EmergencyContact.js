@@ -186,11 +186,13 @@ class EmergencyContact extends React.Component {
                 <form>
                 
                 <h3>Reason For Visit</h3>
-                {/*<div className="form-row">
+                <p className="instructions">Please enter the reason for your visit today.</p>
+                <div className="form-row">
                     <div className="col-md-12 mb-3">
                         <label>Reason for visit</label>
                         <textarea className="form-control" rows="3" 
                         name="patient_reason_for_visit"
+                        disabled
                         value={this.state.patient_reason_for_visit}
                          onChange={this.handleChange}
                          onBlur={this.handleValidation}
@@ -200,7 +202,7 @@ class EmergencyContact extends React.Component {
                             {this.state.errors.patient_reason_for_visit}
                           </div>}
                     </div>
-                </div>*/}
+                </div>
                 <br/>
                 
                 <h3>Emergency Contact Information</h3>
@@ -258,7 +260,7 @@ class EmergencyContact extends React.Component {
                 <br/>
                 
                 <h3>Insurance Information</h3>
-                <p className="instructions">Please enter the information on your insruance card that corresponds to the fields below.</p>
+                <p className="instructions">Please enter the information on your insurance card that corresponds to the fields below.</p>
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
                         <label className="col-form-label">
