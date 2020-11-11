@@ -175,9 +175,10 @@ class ReviewPage extends React.Component {
               <br/>
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
-                        <label className="col-sm-2 col-form-label">Reason for visit</label>
+                        <label htmlFor="staticReasonVisit" className="col-sm-2 col-form-label">Reason for visit</label>
                         <textarea className="form-control" rows="3"
                         readOnly
+                        id="staticReasonVisit"
                         value={currState.patient_reason_for_visit ? currState.patient_reason_for_visit : 'N/A'}
                         />
                     </div>
@@ -209,15 +210,15 @@ class ReviewPage extends React.Component {
                <h3>Insurance Information</h3>  
               <br/>
               <div className="form-group row">
-                <label htmlFor="staticEmergCont" className="col-sm-2 col-form-label">Emergency Contact: </label>
+                <label htmlFor="staticInsurCompName" className="col-sm-2 col-form-label">Emergency Contact: </label>
                 <div className="col-sm-10">
-                  <input type="text" readOnly className="form-control" id="staticEmergCont" value={currState.insurance_company_name ? currState.insurance_company_name : 'N/A'} />
+                  <input type="text" readOnly className="form-control" id="staticInsurCompName" value={currState.insurance_company_name ? currState.insurance_company_name : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label htmlFor="staticEmergContRel" className="col-sm-2 col-form-label">Emergency Contact Relationship: </label>
+                <label htmlFor="staticInsurCompNum" className="col-sm-2 col-form-label">Emergency Contact Relationship: </label>
                 <div className="col-sm-10">
-                  <input type="text" readOnly className="form-control" id="staticEmergContRel" value={currState.insurance_contact_number ? currState.insurance_contact_number : 'N/A'} />
+                  <input type="text" readOnly className="form-control" id="staticInsurCompNum" value={currState.insurance_contact_number ? currState.insurance_contact_number : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
@@ -227,30 +228,30 @@ class ReviewPage extends React.Component {
                 </div>
               </div>
               <div className="form-group row">
-                <label htmlFor="staticEmergContNum" className="col-sm-2 col-form-label">Emergency Contact Number: </label>
+                <label htmlFor="staticInsurPlanNum" className="col-sm-2 col-form-label">Emergency Contact Number: </label>
                 <div className="col-sm-10">
-                  <input type="text" readOnly className="form-control" id="staticEmergContNum" value={currState.insurance_plan_name ? currState.insurance_plan_name : 'N/A'} />
+                  <input type="text" readOnly className="form-control" id="staticInsurPlanNum" value={currState.insurance_plan_name ? currState.insurance_plan_name : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label htmlFor="staticInsurID" className="col-sm-2 col-form-label">Insureance ID Number: </label>
+                <label htmlFor="staticInsurGroupID" className="col-sm-2 col-form-label">Insureance ID Number: </label>
                 <div className="col-sm-10">
-                  <input type="text" readOnly className="form-control" id="staticInsurID" value={currState.insurance_group_number ? currState.insurance_group_number : 'N/A'} />
+                  <input type="text" readOnly className="form-control" id="staticInsurGroupID" value={currState.insurance_group_number ? currState.insurance_group_number : 'N/A'} />
                 </div>
               </div>
               
               
               <h3>Medical History</h3>  
               <div className="form-group row">
-                <label htmlFor="staticInsurID" className="col-sm-2 col-form-label">Insureance ID Number: </label>
+                <label htmlFor="staticPatientMedHistory" className="col-sm-2 col-form-label">Patient Medical History: </label>
                 <div className="col-sm-10">
-                  <p>Create method to iterate of over the boolean values and printing the ones that are true in a string list.</p>
+                  <p id="staticPatientMedHistory">Create method to iterate of over the boolean values and printing the ones that are true in a string list.</p>
                 </div>
               </div>
               <div className="form-group row">
-                <label htmlFor="staticEmergCont" className="col-sm-2 col-form-label">Emergency Contact: </label>
+                <label htmlFor="staticFamilyMedHistory" className="col-sm-2 col-form-label">Family Medical History: </label>
                 <div className="col-sm-10">
-                  <p>Create method to iterate of over the boolean values and printing the ones that are true in a string list.</p>
+                  <p id="staticFamilyMedHistory">Create method to iterate of over the boolean values and printing the ones that are true in a string list.</p>
                 </div>
               </div>
               
