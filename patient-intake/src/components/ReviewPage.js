@@ -210,31 +210,31 @@ class ReviewPage extends React.Component {
                <h3>Insurance Information</h3>  
               <br/>
               <div className="form-group row">
-                <label htmlFor="staticInsurCompName" className="col-sm-2 col-form-label">Emergency Contact: </label>
+                <label htmlFor="staticInsurCompName" className="col-sm-2 col-form-label">Insurance Company Name: </label>
                 <div className="col-sm-10">
                   <input type="text" readOnly className="form-control" id="staticInsurCompName" value={currState.insurance_company_name ? currState.insurance_company_name : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label htmlFor="staticInsurCompNum" className="col-sm-2 col-form-label">Emergency Contact Relationship: </label>
+                <label htmlFor="staticInsurCompNum" className="col-sm-2 col-form-label">Insurance Contact Number: </label>
                 <div className="col-sm-10">
                   <input type="text" readOnly className="form-control" id="staticInsurCompNum" value={currState.insurance_contact_number ? currState.insurance_contact_number : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label htmlFor="staticInsurID" className="col-sm-2 col-form-label">Insureance ID Number: </label>
+                <label htmlFor="staticInsurID" className="col-sm-2 col-form-label">Insurance ID Number: </label>
                 <div className="col-sm-10">
                   <input type="text" readOnly className="form-control" id="staticInsurID" value={currState.patient_insurance_id ? currState.patient_insurance_id : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label htmlFor="staticInsurPlanNum" className="col-sm-2 col-form-label">Emergency Contact Number: </label>
+                <label htmlFor="staticInsurPlanNum" className="col-sm-2 col-form-label">Insurance Plan Name: </label>
                 <div className="col-sm-10">
                   <input type="text" readOnly className="form-control" id="staticInsurPlanNum" value={currState.insurance_plan_name ? currState.insurance_plan_name : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label htmlFor="staticInsurGroupID" className="col-sm-2 col-form-label">Insureance ID Number: </label>
+                <label htmlFor="staticInsurGroupID" className="col-sm-2 col-form-label">Insurance Group Number: </label>
                 <div className="col-sm-10">
                   <input type="text" readOnly className="form-control" id="staticInsurGroupID" value={currState.insurance_group_number ? currState.insurance_group_number : 'N/A'} />
                 </div>
