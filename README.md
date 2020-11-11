@@ -9,10 +9,10 @@ Database Access: Karan, Sai
 Product Owner: Shared by all members
 
 # API
-[ControlPatientIntake] (https://github.com/AkasshShah/ControlPatientIntake)
+[ControlPatientIntake](https://github.com/AkasshShah/ControlPatientIntake)
 
 # Current Release of Application
-[Patient Intake] (https://afternoon-refuge-23007.herokuapp.com/#/)
+[Patient Intake](https://afternoon-refuge-23007.herokuapp.com/#/)
 
 # Far Vision
 For medical practices, who need an efficient and simple way of recording new/returning patient information during check-in, the AccessMyHealth is the ideal patient intake application that makes filling out information quick and seamless.
