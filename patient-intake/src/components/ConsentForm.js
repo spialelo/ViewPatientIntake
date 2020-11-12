@@ -18,13 +18,13 @@ class ConsentForm extends React.Component {
     }
     
     componentDidMount() {
-        const prevState = this.props ? this.props.location.state : Object.assign({});
-        Object.keys(prevState).forEach((key) => {
-            if(Object.keys(prevState[key])) {
-                this.setState({[key]: Object.assign({}, prevState[key])});
-            }
-            this.setState({[key]: prevState[key]});
-        });
+        // const prevState = this.props ? this.props.location.state : Object.assign({});
+        // Object.keys(prevState).forEach((key) => {
+        //     if(Object.keys(prevState[key])) {
+        //         this.setState({[key]: Object.assign({}, prevState[key])});
+        //     }
+        //     this.setState({[key]: prevState[key]});
+        // });
     }
     
     handleChange(e) {
@@ -75,8 +75,8 @@ class ConsentForm extends React.Component {
         const patientFile = this.state.patient;
         // Pass this component's state onto the next component/fields for user to fill in
         this.props.history.push({ 
-            pathname: '/medical-history',
-            // pathname: '/review-page',
+            // pathname: '/medical-history',
+            pathname: '/review-page',
             state: this.state
         });
     }
@@ -101,25 +101,74 @@ class ConsentForm extends React.Component {
                 <br/>
                 <form>
                 
-                <h3>Reason For Visit</h3>
-                <p className="instructions">Please enter the reason for your visit today.</p>
+                <h3>Authorization for Release of Information</h3>
                 <div className="form-row">
-                    <p></p>
+                    <p>May we leave testing results or referral info in email or voicemail?</p>
+                    <div className="form-check">
+                      <input className="form-check-input" type="checkbox" name="auth_yes" onChange={this.handleChange} />
+                      <label className="form-check-label">Yes</label>
+                    </div>
+                    <div className="form-check">
+                      <input className="form-check-input" type="checkbox" name="auth_no" onChange={this.handleChange} />
+                      <label className="form-check-label">No</label>
+                    </div>
+                </div>
+                <div className="form-row">
+                <p>Who may receive information on your behalf regarding testing or referrals?</p>
+                <div className="form-check form-check-inline margin-1-1">
+                      <label className="col-form-label">
+                          Name:
+                         </label>
+                         <input type="text" className="form-control"
+                         name="consent_initial" 
+                         placeholder="Name"
+                         value={this.state.consent_initial}
+                         onChange={this.handleChange}
+                         onBlur={this.handleValidation}
+                         />
+                         {this.state.errors.consent_initial && 
+                          <div className="invalid-feedback" style={{display: 'block'}}>
+                            {this.state.errors.consent_initial}
+                          </div>}
+                    </div>
+                </div>
+                
+                
+                <h3>Patient Consent for Treatment</h3>
+                <div className="form-row">
+                    <p>
+                    <ol>
+                        <li>I voluntarily consent to any and all health care treatment and diagnostic procedures provided by this practice and its
+associated physicians, clinicians and other personnel. I am aware that the practice of medicine and other health care
+professions is not an exact science and I further state that I understand that no guarantee has been or can be made as
+to the results of the treatments or examinations at the medical practice office.</li>
+                    <li>I agree to be contacted via email or SMS with information related to my visit, like: a patient portal invitation, post-visit
+satisfaction survey, appointment or checkup reminders, health tips, or new services that relate to me or my family.</li>
+                    <li>I consent to the use and disclosure of my/the patient’s protected health information for purposes of obtaining payment for
+services rendered to me/the patient, treatment and health care operations consistent with the practice's privacy
+practices.</li>
+                    <li>I authorize payment of medical benefits to the practice's physicians or their designee for services rendered.</li>
+                    <li>I give permission to obtain all my medication/prescription history when using an electronic system to process prescriptions
+for my medical treatment.</li>
+                    </ol>
+                    
+                    </p>
                 </div>
                 <br/>
-                <p className="instructions">I have received a copy of the Notice of Privacy Practice and Financial Policy Notice</p>
+                
                 <div className="form-row">
-                    <div className="form-check form-check-inline">
+                <p>I have received a copy of the Notice of Privacy Practice and Financial Policy Notice</p>
+                    <div className="form-check">
                       <input className="form-check-input" type="checkbox" name="family_cancer" onChange={this.handleChange} />
                       <label className="form-check-label">Yes</label>
                     </div>
-                    <div className="form-check form-check-inline">
+                    <div className="form-check">
                       <input className="form-check-input" type="checkbox" name="family_cancer" onChange={this.handleChange} />
                       <label className="form-check-label">No</label>
                     </div>
-                    <div className="form-check form-check-inline">
+                    <div className="form-check form-check-inline margin-1-1">
                       <label className="col-form-label">
-                          Insurance Company Name:
+                          Initial:
                          </label>
                          <input type="text" className="form-control"
                          name="consent_initial" 
@@ -136,28 +185,30 @@ class ConsentForm extends React.Component {
                 </div>
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
-                        <label className="col-form-label">
-                          Patient or Authorized Person’s Signature
-                         </label>
                          <input type="text" className="form-control"
                          name="consent_signature" 
-                         placeholder="Name"
+                         placeholder="X"
                          value={this.state.consent_signature}
                          onChange={this.handleChange}
                          onBlur={this.handleValidation}
                          />
+                         <small className="form-text text-muted">
+                              Patient or Authorized Person’s Signature
+                        </small>
                          {this.state.errors.consent_signature && 
                           <div className="invalid-feedback" style={{display: 'block'}}>
                             {this.state.errors.consent_signature}
                           </div>}
                      </div>
                      <div className="col-md-3 mb-3">
-                      <label>Date</label>
                       <input type="date" className="form-control" name="consent_date" placeholder="YYYY-MM-DD"
                       value={this.state.consent_date}
                       onChange={this.handleChange}
                       onBlur={this.handleValidation}
                       required />
+                      <small className="form-text text-muted">
+                            Date
+                        </small>
                      {this.state.errors.consent_date && 
                       <div className="invalid-feedback" style={{display: 'block'}}>
                         {this.state.errors.consent_date}

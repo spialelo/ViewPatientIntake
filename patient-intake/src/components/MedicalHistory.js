@@ -147,6 +147,8 @@ class MedicalHistory extends React.Component {
                       <label className="form-check-label">Pacemaker</label>
                     </div>
                 </div>
+                <br/>
+                <br/>
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
                         <label>Allergies</label>

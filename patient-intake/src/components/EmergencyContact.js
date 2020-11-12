@@ -160,7 +160,6 @@ class EmergencyContact extends React.Component {
         // Pass this component's state onto the next component/fields for user to fill in
         this.props.history.push({ 
             pathname: '/medical-history',
-            // pathname: '/review-page',
             state: this.state
         });
     }
