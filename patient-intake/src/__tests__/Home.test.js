@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import '@testing-library/jest-dom';
 //@testing-library/jest-dom
-import Home from './components/Home';
+import Home from '../components/Home';
 
 // Nested components within a component will be difficult to test.
 // Test the nested component's functionality separately.

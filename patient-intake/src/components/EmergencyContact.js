@@ -42,7 +42,7 @@ class EmergencyContact extends React.Component {
       const key = inputTarget.name;
       
       switch (key) {
-          case 'patient_reason_for_visit':
+          case 'reason_for_visit':
           // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
@@ -190,15 +190,15 @@ class EmergencyContact extends React.Component {
                     <div className="col-md-12 mb-3">
                         <label>Reason for visit</label>
                         <textarea className="form-control" rows="3" 
-                        name="patient_reason_for_visit"
+                        name="reason_for_visit"
                         disabled
-                        value={this.state.patient_reason_for_visit}
+                        value={this.state.reason_for_visit}
                          onChange={this.handleChange}
                          onBlur={this.handleValidation}
                         />
-                        {this.state.errors.patient_reason_for_visit && 
+                        {this.state.errors.reason_for_visit && 
                           <div className="invalid-feedback" style={{display: 'block'}}>
-                            {this.state.errors.patient_reason_for_visit}
+                            {this.state.errors.reason_for_visit}
                           </div>}
                     </div>
                 </div>
