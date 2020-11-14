@@ -46,9 +46,9 @@ class EmergencyContact extends React.Component {
           // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 150) {
+          } else if (inputTarget.value !== '' && inputTarget.value.length > 7000) {
               errors[key] = "Maximum length of 150 characters.";
-          } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 150) {
+          } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 7000) {
               delete errors[key];
           }
           this.setState({errors});
