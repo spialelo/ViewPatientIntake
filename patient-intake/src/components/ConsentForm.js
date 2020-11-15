@@ -9,7 +9,8 @@ class ConsentForm extends React.Component {
         
         this.state = {
             patient: {},
-            errors: {}
+            errors: {},
+            buttonDisabled: false
         }
         
         this.handleChange = this.handleChange.bind(this);
@@ -72,18 +73,17 @@ class ConsentForm extends React.Component {
 
     handleNext(e) {
         e.preventDefault();
-        const patientFile = this.state.patient;
-        // Pass this component's state onto the next component/fields for user to fill in
+        const finalState = this.state;
+        delete finalState["buttonDisabled"];
         this.props.history.push({ 
-            // pathname: '/medical-history',
             pathname: '/review-page',
-            state: this.state
+            state: finalState
         });
     }
     
     render () {
         
-        let errors = Object.keys(this.state.errors).length > 0;
+        let { buttonDisabled } = this.state;
         
         return (
             <div>
@@ -100,7 +100,8 @@ class ConsentForm extends React.Component {
                 <hr />
                 <br/>
                 <form>
-                
+                 <fieldset disabled>
+                 <br/>
                 <h3>Authorization for Release of Information</h3>
                 <div className="form-row">
                     <p>May we leave testing results or referral info in email or voicemail?</p>
@@ -133,7 +134,7 @@ class ConsentForm extends React.Component {
                     </div>
                 </div>
                 
-                
+                <br/>
                 <h3>Patient Consent for Treatment</h3>
                 <div className="form-row">
                     <p>
@@ -217,13 +218,13 @@ for my medical treatment.</li>
                       
                      
                 </div>
-                
+                </fieldset>
             
                     <br/>
                     <br/>
                     <input type="submit" 
                     className="btn btn-primary"
-                    disabled={errors}
+                    disabled={buttonDisabled}
                     value="Next &#x2192;" onClick={e => this.handleNext(e)} />
                     <br/>
                     <br/>

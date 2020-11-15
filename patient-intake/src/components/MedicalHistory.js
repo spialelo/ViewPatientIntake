@@ -90,7 +90,7 @@ class MedicalHistory extends React.Component {
         const finalState = this.state;
         delete finalState["buttonDisabled"];
         this.props.history.push({ 
-            pathname: '/review-page',
+            pathname: '/consent-form',
             state: finalState
         });
     }
