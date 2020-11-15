@@ -10,27 +10,27 @@ class MedicalHistory extends React.Component {
             patient: {
               patient_allergies: '',
               insurance_pharmacy_network: '', // here until it is removed
-              patient_drinker: false,
-              patient_cancer: false,
-              patient_currently_pregnant: false,
-              patient_diabetes: false,
-              patient_drinker: false,
-              patient_high_blood_pressure: false,
-              patient_heart_disease: false,
-              patient_metal_implants: false,
-              patient_pacemaker: false,
-              patient_smoker: false,
-              family_bleeding_disorder: false,
-              family_cancer: false,
-              family_diabetes: false,
-              family_heart_conditions: false,
-              family_heart_disease: false,
-              family_high_blood_pressure: false,
-              family_sickle_cell_disease: false,
-              family_stroke: false
+              patient_drinker: '0',
+              patient_cancer: '0',
+              patient_currently_pregnant: '0',
+              patient_diabetes: '0',
+              patient_drinker: '0',
+              patient_high_blood_pressure: '0',
+              patient_heart_disease: '0',
+              patient_metal_implants: '0',
+              patient_pacemaker: '0',
+              patient_smoker: '0',
+              family_bleeding_disorder: '0',
+              family_cancer: '0',
+              family_diabetes: '0',
+              family_heart_conditions: '0',
+              family_heart_disease: '0',
+              family_high_blood_pressure: '0',
+              family_sickle_cell_disease: '0',
+              family_stroke: '0'
             },
             errors: {},
-            buttonDisabled: true
+            buttonDisabled: false
         }
         
         this.handleChange = this.handleChange.bind(this);
@@ -87,10 +87,11 @@ class MedicalHistory extends React.Component {
 
     handleNext(e) {
         e.preventDefault();
-        const patientFile = this.state.patient;
+        const finalState = this.state;
+        delete finalState["buttonDisabled"];
         this.props.history.push({ 
             pathname: '/review-page',
-            state: this.state
+            state: finalState
         });
     }
     
