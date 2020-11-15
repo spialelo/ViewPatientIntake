@@ -38,6 +38,7 @@ class ReviewPage extends React.Component {
         prepData.Token = process.env.REACT_APP_GROUP5_TOKEN;
         // prepData.Type = process.env.REACT_APP_TYPE_SPIE; // Only patient information
         prepData.Type = process.env.REACT_APP_TYPE_SPPIMHFHIE; //All field in one post
+        // prepData.Type = process.env.REACT_APP_TYPE_SPPIMHFHRFVIE // Reason for visit added
 
         
         const jsonPrepData = JSON.stringify(prepData);

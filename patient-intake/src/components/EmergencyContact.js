@@ -189,9 +189,8 @@ class EmergencyContact extends React.Component {
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
                         <label>Reason for visit</label>
-                        <textarea className="form-control" rows="3" 
+                        <textarea className="form-control" rows="3" maxlength="7000"
                         name="reason_for_visit"
-                        disabled
                         value={this.state.reason_for_visit}
                          onChange={this.handleChange}
                          onBlur={this.handleValidation}
