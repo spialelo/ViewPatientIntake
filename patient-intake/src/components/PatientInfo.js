@@ -187,6 +187,7 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
         default:
+        // code
       }
       
       const { buttonDisabled } = this.state;
@@ -207,8 +208,7 @@ class PatientInfo extends React.Component {
     }
     
     render() {
-      
-      // let errors = Object.keys(this.state.errors).length > 0;
+    
       let { buttonDisabled } = this.state;
       
         return(

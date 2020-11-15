@@ -1,6 +1,5 @@
 import React from 'react';
 import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 class EmergencyContact extends React.Component {
     
@@ -9,7 +8,8 @@ class EmergencyContact extends React.Component {
         
         this.state = {
             patient: {},
-            errors: {}
+            errors: {},
+            buttonDisabled: true
         }
         
         this.handleChange = this.handleChange.bind(this);
@@ -43,7 +43,6 @@ class EmergencyContact extends React.Component {
       
       switch (key) {
           case 'reason_for_visit':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 7000) {
@@ -54,7 +53,6 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'patient_emergency_contact_name':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 64) {
@@ -65,7 +63,6 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'patient_emergency_contact_relationship':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
@@ -77,7 +74,6 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'patient_emergency_contact_number':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 10) {
@@ -89,7 +85,6 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'insurance_company_name':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
@@ -101,7 +96,6 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'insurance_contact_number':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 10) {
@@ -113,7 +107,6 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'patient_insurance_id':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 9) {
@@ -125,7 +118,6 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'insurance_group_number':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
@@ -137,7 +129,6 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'insurance_plan_name':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
@@ -152,12 +143,16 @@ class EmergencyContact extends React.Component {
           // code
       }
       
+      const { buttonDisabled } = this.state;
+      let newButtonState = (Object.keys(this.state.patient).length < 13 || Object.keys(this.state.errors).length > 0);
+      
+      this.setState({buttonDisabled: newButtonState});
+      
     }
 
     handleNext(e) {
         e.preventDefault();
         const patientFile = this.state.patient;
-        // Pass this component's state onto the next component/fields for user to fill in
         this.props.history.push({ 
             pathname: '/medical-history',
             state: this.state
@@ -166,7 +161,7 @@ class EmergencyContact extends React.Component {
     
     render () {
         
-        let errors = Object.keys(this.state.errors).length > 0;
+        let { buttonDisabled } = this.state;
         
         return (
             <div>
@@ -342,7 +337,7 @@ class EmergencyContact extends React.Component {
                     <br/>
                     <input type="submit" 
                     className="btn btn-primary"
-                    disabled={errors}
+                    disabled={buttonDisabled}
                     value="Next &#x2192;" onClick={e => this.handleNext(e)} />
                     <br/>
                     <br/>

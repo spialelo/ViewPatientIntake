@@ -1,6 +1,5 @@
 import React from 'react';
 import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 class MedicalHistory extends React.Component {
     
@@ -30,7 +29,8 @@ class MedicalHistory extends React.Component {
               family_sickle_cell_disease: false,
               family_stroke: false
             },
-            errors: {}
+            errors: {},
+            buttonDisabled: true
         }
         
         this.handleChange = this.handleChange.bind(this);
@@ -39,7 +39,6 @@ class MedicalHistory extends React.Component {
     }
     
     componentDidMount() {
-        // temporarily commented out for testing
         const prevState = this.props ? this.props.location.state : Object.assign({});
         Object.keys(prevState).forEach((key) => {
             if(Object.keys(prevState[key])) {
@@ -64,8 +63,6 @@ class MedicalHistory extends React.Component {
       const key = inputTarget.name;
       switch (key) {
           case 'patient_reason_for_visit':
-          // code
-
             if (inputTarget.value !== '') {
               let allergies = inputTarget.value;
               
@@ -81,12 +78,16 @@ class MedicalHistory extends React.Component {
           //code
       }
       
+      const { buttonDisabled } = this.state;
+      let newButtonState = (Object.keys(this.state.patient).length < 13 || Object.keys(this.state.errors).length > 0);
+      
+      this.setState({buttonDisabled: newButtonState});
+      
     }
 
     handleNext(e) {
         e.preventDefault();
         const patientFile = this.state.patient;
-        // Pass this component's state onto the next component/fields for user to fill in
         this.props.history.push({ 
             pathname: '/review-page',
             state: this.state
@@ -95,7 +96,7 @@ class MedicalHistory extends React.Component {
     
     render () {
         
-        let errors = Object.keys(this.state.errors).length > 0;
+        let { buttonDisabled } = this.state;
         
         return (
             <div>
@@ -201,7 +202,7 @@ class MedicalHistory extends React.Component {
                     <br/>
                     <input type="submit" 
                     className="btn btn-primary"
-                    disabled={errors}
+                    disabled={buttonDisabled}
                     value="Next &#x2192;" onClick={e => this.handleNext(e)} />
                     <br/>
                     <br/>
