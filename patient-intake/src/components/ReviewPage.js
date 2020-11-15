@@ -178,7 +178,7 @@ class ReviewPage extends React.Component {
                         <textarea className="form-control" rows="3"
                         readOnly
                         id="staticReasonVisit"
-                        value={currState.patient_reason_for_visit ? currState.patient_reason_for_visit : 'N/A'}
+                        value={currState.reason_for_visit ? currState.reason_for_visit : 'N/A'}
                         />
                     </div>
                 </div>

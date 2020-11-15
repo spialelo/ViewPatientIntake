@@ -51,7 +51,7 @@ class MedicalHistory extends React.Component {
     handleChange(e) {
         const patient = Object.assign({}, this.state.patient);
         const target = e.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const value = target.type === 'checkbox' ? target.checked ? '1' : '0' : target.value;
         const name = target.name;
         patient[name] = value;
         this.setState({patient});
