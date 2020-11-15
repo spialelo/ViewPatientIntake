@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
+import { HashRouter as Router, Link, withRouter } from 'react-router-dom';
 
 class EmergencyContact extends React.Component {
     

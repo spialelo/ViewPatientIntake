@@ -1,6 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { HashRouter as Router, Link, withRouter } from 'react-router-dom';
 
 class PatientInfo extends React.Component {
     
@@ -218,7 +217,11 @@ class PatientInfo extends React.Component {
             <nav className="fixed-top" aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
-                <li className="breadcrumb-item"><Link to="/patient-info">Patient Information</Link></li>
+                <li className="breadcrumb-item">
+                  <Router>
+                    <Link to="/patient-info">Patient Information</Link>
+                  </Router>
+                </li>
               </ol>
             </nav>
             </header>

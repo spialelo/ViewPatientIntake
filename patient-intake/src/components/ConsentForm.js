@@ -1,6 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { HashRouter as Router, Link, withRouter } from 'react-router-dom';
 
 class ConsentForm extends React.Component {
     

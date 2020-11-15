@@ -68,7 +68,3 @@ describe('Home Component', () => {
 
   });
 
-// test if the click on button takes the user to expected page - url check
-// mock functions needed
-
-
