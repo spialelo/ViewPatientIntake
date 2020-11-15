@@ -199,11 +199,12 @@ class PatientInfo extends React.Component {
 
     handleNext(e) {
         e.preventDefault();
-        const patientFile = this.state.patient;
+        const finalState = this.state;
+        delete finalState["buttonDisabled"];
         // Pass this component's state onto the next component to pass along to the final page prior to submisssion
         this.props.history.push({ 
             pathname: '/emergency-contact',
-            state: this.state
+            state: finalState
         });
     }
     
@@ -347,21 +348,6 @@ class PatientInfo extends React.Component {
                         {this.state.errors.patient_dob}
                       </div>}
                     </div>
-                    
-                    {/*<div className="col-md-6 mb-3">
-                      <label>Insurance ID#</label>
-                      <input type="text" className="form-control" name="patient_insurance_id" 
-                      placeholder="Insurance ID#" 
-                      value={this.state.patient_insurance_id} 
-                      onChange={this.handleChange}
-                      onBlur={this.handleValidation}
-                      required />
-                      {this.state.errors.patient_insurance_id && 
-                      <div className="invalid-feedback" style={{display: 'block'}}>
-                        {this.state.errors.patient_insurance_id}
-                      </div>}
-                    </div>*/}
-                    
                 </div>
                 
                 <div className="form-row">

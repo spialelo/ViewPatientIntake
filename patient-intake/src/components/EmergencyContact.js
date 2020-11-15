@@ -85,9 +85,7 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'insurance_company_name':
-          if(inputTarget.value === '') {
-            errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
+          if (inputTarget.value !== '' && inputTarget.value.length > 32) {
               errors[key] = "Maximum length of 32 characters.";
           } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 32) {
               delete errors[key];
@@ -96,9 +94,7 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'insurance_contact_number':
-          if(inputTarget.value === '') {
-            errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 10) {
+          if (inputTarget.value !== '' && inputTarget.value.length > 10) {
               errors[key] = "Maximum length of 10 characters.";
           } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 10) {
               delete errors[key];
@@ -107,9 +103,7 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'patient_insurance_id':
-          if(inputTarget.value === '') {
-            errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 9) {
+          if (inputTarget.value !== '' && inputTarget.value.length > 9) {
               errors[key] = "Maximum length of 9 characters.";
           } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 9) {
               delete errors[key];
@@ -118,9 +112,7 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'insurance_group_number':
-          if(inputTarget.value === '') {
-            errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
+          if (inputTarget.value !== '' && inputTarget.value.length > 32) {
               errors[key] = "Maximum length of 32 characters.";
           } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 32) {
               delete errors[key];
@@ -129,9 +121,7 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'insurance_plan_name':
-          if(inputTarget.value === '') {
-            errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
+          if (inputTarget.value !== '' && inputTarget.value.length > 32) {
               errors[key] = "Maximum length of 32 characters.";
           } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 32) {
               delete errors[key];
@@ -144,7 +134,7 @@ class EmergencyContact extends React.Component {
       }
       
       const { buttonDisabled } = this.state;
-      let newButtonState = (Object.keys(this.state.patient).length < 13 || Object.keys(this.state.errors).length > 0);
+      let newButtonState = (Object.keys(this.state.patient).length < 4 || Object.keys(this.state.errors).length > 0);
       
       this.setState({buttonDisabled: newButtonState});
       
@@ -152,10 +142,11 @@ class EmergencyContact extends React.Component {
 
     handleNext(e) {
         e.preventDefault();
-        const patientFile = this.state.patient;
+        const finalState = this.state;
+        delete finalState["buttonDisabled"];
         this.props.history.push({ 
             pathname: '/medical-history',
-            state: this.state
+            state: finalState
         });
     }
     
@@ -288,7 +279,7 @@ class EmergencyContact extends React.Component {
                           </div>}
                      </div>
                       <div className="col-md-6 mb-3">
-                      <label>Insurance ID#</label>
+                      <label className="col-form-label">Insurance ID#</label>
                       <input type="text" className="form-control" name="patient_insurance_id" 
                       placeholder="Insurance ID#" 
                       value={this.state.patient_insurance_id} 
