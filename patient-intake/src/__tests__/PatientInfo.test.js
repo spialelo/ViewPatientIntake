@@ -1,5 +1,5 @@
 import React from 'react';
-import { render,screen,cleanup, fireEvent } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import '@testing-library/jest-dom';
@@ -12,7 +12,6 @@ describe('PatientInfo Component', () => {
     
     describe('Test validation of input fields and button', () => {
         beforeEach(() => {
-            render(<PatientInfo />);
         });
         
         afterEach(() => {
@@ -20,9 +19,9 @@ describe('PatientInfo Component', () => {
         });
         
         
-        test('Assert Next button is disabled on initial screen render', () => {
-          const nextButton = screen.getByRole('button');
-          expect(nextButton).toHaveAttribute('disabled');
+        test('Assert Next button is disabled on initial screen render', async () => {
+            const { getByRole } = await render(<PatientInfo />);
+            expect(getByRole('button')).toHaveAttribute('disabled');
         });
         
 
