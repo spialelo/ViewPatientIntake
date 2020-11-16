@@ -18,13 +18,13 @@ class ConsentForm extends React.Component {
     }
     
     componentDidMount() {
-        // const prevState = this.props ? this.props.location.state : Object.assign({});
-        // Object.keys(prevState).forEach((key) => {
-        //     if(Object.keys(prevState[key])) {
-        //         this.setState({[key]: Object.assign({}, prevState[key])});
-        //     }
-        //     this.setState({[key]: prevState[key]});
-        // });
+        const prevState = this.props ? this.props.location.state : Object.assign({});
+        Object.keys(prevState).forEach((key) => {
+            if(Object.keys(prevState[key])) {
+                this.setState({patient: Object.assign({}, prevState.patient, this.state.patient)});
+            }
+            this.setState({[key]: prevState[key]});
+        });
     }
     
     handleChange(e) {
@@ -90,7 +90,11 @@ class ConsentForm extends React.Component {
                 <nav className="fixed-top" aria-label="breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
-                    <li className="breadcrumb-item"><Link to="/emergency-contact">Patient Consent Forms</Link></li>
+                    <li className="breadcrumb-item">
+                        <Router>
+                            <Link to="/emergency-contact">Patient Consent Forms</Link>
+                        </Router>
+                    </li>
                   </ol>
                 </nav>
             </header>
@@ -136,7 +140,7 @@ class ConsentForm extends React.Component {
                 <br/>
                 <h3>Patient Consent for Treatment</h3>
                 <div className="form-row">
-                    <p>
+                    
                     <ol>
                         <li>I voluntarily consent to any and all health care treatment and diagnostic procedures provided by this practice and its
 associated physicians, clinicians and other personnel. I am aware that the practice of medicine and other health care
@@ -152,7 +156,7 @@ practices.</li>
 for my medical treatment.</li>
                     </ol>
                     
-                    </p>
+                    
                 </div>
                 <br/>
                 

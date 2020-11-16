@@ -160,7 +160,11 @@ class EmergencyContact extends React.Component {
                 <nav className="fixed-top" aria-label="breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
-                    <li className="breadcrumb-item"><Link to="/emergency-contact">Emergency Contact & Insurance</Link></li>
+                    <li className="breadcrumb-item">
+                        <Router>
+                            <Link to="/emergency-contact">Emergency Contact & Insurance</Link>
+                        </Router>
+                    </li>
                   </ol>
                 </nav>
             </header>
@@ -175,7 +179,7 @@ class EmergencyContact extends React.Component {
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
                         <label>Reason for visit</label>
-                        <textarea className="form-control" rows="3" maxlength="7000"
+                        <textarea className="form-control" rows="3" maxLength="7000"
                         name="reason_for_visit"
                         value={this.state.reason_for_visit}
                          onChange={this.handleChange}

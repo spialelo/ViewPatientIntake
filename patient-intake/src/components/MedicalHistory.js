@@ -105,7 +105,11 @@ class MedicalHistory extends React.Component {
                 <nav className="fixed-top" aria-label="breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
-                    <li className="breadcrumb-item"><Link to="/medical-history">Medical History</Link></li>
+                    <li className="breadcrumb-item">
+                      <Router>
+                        <Link to="/medical-history">Medical History</Link>
+                      </Router>  
+                    </li>
                   </ol>
                 </nav>
             </header>

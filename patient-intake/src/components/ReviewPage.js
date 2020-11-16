@@ -20,7 +20,7 @@ class ReviewPage extends React.Component {
         const prevState = this.props ? this.props.location.state : Object.assign({});
         Object.keys(prevState).forEach((key) => {
             if(Object.keys(prevState[key])) {
-                this.setState({[key]: Object.assign({}, prevState[key])});
+                this.setState({patient: Object.assign({}, prevState.patient, this.state.patient)});
             }
             this.setState({[key]: prevState[key]});
         });
@@ -67,14 +67,11 @@ class ReviewPage extends React.Component {
         
         // Private info/keys isn .env for safekeeping and added to .gitignore
         prepData.Token = process.env.REACT_APP_GROUP5_TOKEN;
-        // prepData.Type = process.env.REACT_APP_TYPE_SPIE; // Only patient information
-        // prepData.Type = process.env.REACT_APP_TYPE_SPPIMHFHIE; //All field in one post
-        prepData.Type = process.env.REACT_APP_TYPE_SPPIMHFHRFVIE // Reason for visit added
+        prepData.Type = process.env.REACT_APP_TYPE_SPPIMHFHRFVIE // All field in one post
 
         
         const jsonPrepData = JSON.stringify(prepData);
         const proxy = 'https://cors-anywhere.herokuapp.com/'; // Address CORS Access-Control-Allow-Origin issue
-        // const url = process.env.REACT_APP_API_PATH;
         const url = 'https://web.njit.edu/~as2757/ControlPatientIntake/api.php';
         const proxyPlusURL = proxy+url
 
@@ -126,7 +123,11 @@ class ReviewPage extends React.Component {
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
-                <li className="breadcrumb-item"><Link to="/review-page">Review Information</Link></li>
+                <li className="breadcrumb-item">
+                  <Router>
+                    <Link to="/review-page">Review Information</Link>
+                  </Router>
+                </li>
               </ol>
             </nav>
             </header>
