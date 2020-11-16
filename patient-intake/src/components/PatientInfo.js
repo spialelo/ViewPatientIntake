@@ -1,6 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { HashRouter as Router, Link, withRouter } from 'react-router-dom';
 
 class PatientInfo extends React.Component {
     
@@ -14,7 +13,7 @@ class PatientInfo extends React.Component {
               patient_address_line_2: ''
             },
             errors: {},
-            buttonDisaabled: false
+            buttonDisabled: true
         }
         
         this.handleChange = this.handleChange.bind(this);
@@ -23,11 +22,7 @@ class PatientInfo extends React.Component {
     }
     
     componentDidMount() {
-      const { buttonDisaabled } = this.state;
-      let newButtonState = (Object.keys(this.state.patient).length < 1 || Object.keys(this.state.errors).length > 0);
-      
-      this.setState({buttonDisaabled: newButtonState});
-      
+      // code
     }
     
     handleChange(e) {
@@ -46,7 +41,6 @@ class PatientInfo extends React.Component {
       
       switch (key) {
         case 'patient_first_name':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
@@ -57,7 +51,6 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
         case 'patient_middle_name':
-          // code
           if (inputTarget.value !== '' && inputTarget.value.length > 32) {
               errors[key] = "Maximum length of 32 characters.";
           } else if (errors[key] && (inputTarget.value === '' || inputTarget.value.length <= 32)) {
@@ -67,7 +60,6 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
         case 'patient_last_name':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
@@ -79,7 +71,6 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
           case 'patient_emailid':
-          // code
           const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
           if ((inputTarget.value !== '' && pattern.test(inputTarget.value) === false) || inputTarget.value.length > 64) {
                 errors[key] = "Not a valid email."
@@ -91,7 +82,6 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
         case 'patient_contact_number':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 10) {
@@ -103,7 +93,6 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
         case 'patient_sex':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (errors[key] && inputTarget.value !== '') {
@@ -113,7 +102,6 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
         case 'patient_ssn':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 9) {
@@ -125,7 +113,6 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
         case 'patient_dob':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (errors[key] && inputTarget.value !== '') {
@@ -135,7 +122,6 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
         case 'patient_insurance_id':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 9) {
@@ -147,7 +133,6 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
         case 'patient_address_line_1':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
@@ -159,7 +144,6 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
         case 'patient_address_line_2':
-          // code
           if (inputTarget.value !== '' && inputTarget.value.length > 32) {
               errors[key] = "Maximum length of 32 characters.";
           } else if (errors[key] && (inputTarget.value === '' || inputTarget.value.length <= 32)) {
@@ -169,7 +153,6 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
         case 'patient_address_city':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
@@ -181,7 +164,6 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
         case 'patient_address_state':
-          // code
           if (inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 16) {
@@ -193,42 +175,41 @@ class PatientInfo extends React.Component {
           this.setState({errors});
           break;
         case 'patient_zip_code':
-          // code
           if (inputTarget.value === '') {
             errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 5) {
-              errors[key] = "Maximum length of 5 characters.";
-          } else if (errors[key] && (inputTarget.value === '' || inputTarget.value.length <= 5)) {
+          } else if (inputTarget.value !== '' && inputTarget.value.length > 5 && inputTarget.value.length < 5) {
+              errors[key] = "Zip code is made up of 5 characters.";
+          } else if (errors[key] && (inputTarget.value === '' || inputTarget.value.length === 5)) {
               delete errors[key];
           }
           
           this.setState({errors});
           break;
         default:
-          // code
+        // code
       }
       
-      const { buttonDisaabled } = this.state;
-      let newButtonState = (Object.keys(this.state.patient).length < 1 || Object.keys(this.state.errors).length > 0);
+      const { buttonDisabled } = this.state;
+      let newButtonState = (Object.keys(this.state.patient).length < 13 || Object.keys(this.state.errors).length > 0);
       
-      this.setState({buttonDisaabled: newButtonState});
+      this.setState({buttonDisabled: newButtonState});
       
     }
 
     handleNext(e) {
         e.preventDefault();
-        const patientFile = this.state.patient;
-        // Pass this component's state onto the next component/fields for user to fill in
+        const finalState = this.state;
+        delete finalState["buttonDisabled"];
+        // Pass this component's state onto the next component to pass along to the final page prior to submisssion
         this.props.history.push({ 
             pathname: '/emergency-contact',
-            state: this.state
+            state: finalState
         });
     }
     
     render() {
-      
-      let errors = Object.keys(this.state.errors).length > 0;
-      let { buttonDisaabled } = this.state;
+    
+      let { buttonDisabled } = this.state;
       
         return(
           <div>
@@ -236,7 +217,11 @@ class PatientInfo extends React.Component {
             <nav className="fixed-top" aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
-                <li className="breadcrumb-item"><Link to="/patient-info">Patient Information</Link></li>
+                <li className="breadcrumb-item">
+                  <Router>
+                    <Link to="/patient-info">Patient Information</Link>
+                  </Router>
+                </li>
               </ol>
             </nav>
             </header>
@@ -366,21 +351,6 @@ class PatientInfo extends React.Component {
                         {this.state.errors.patient_dob}
                       </div>}
                     </div>
-                    
-                    {/*<div className="col-md-6 mb-3">
-                      <label>Insurance ID#</label>
-                      <input type="text" className="form-control" name="patient_insurance_id" 
-                      placeholder="Insurance ID#" 
-                      value={this.state.patient_insurance_id} 
-                      onChange={this.handleChange}
-                      onBlur={this.handleValidation}
-                      required />
-                      {this.state.errors.patient_insurance_id && 
-                      <div className="invalid-feedback" style={{display: 'block'}}>
-                        {this.state.errors.patient_insurance_id}
-                      </div>}
-                    </div>*/}
-                    
                 </div>
                 
                 <div className="form-row">
@@ -503,7 +473,7 @@ class PatientInfo extends React.Component {
                     <br/>
                     <br/>
                     <input type="submit"
-                    disabled={buttonDisaabled}
+                    disabled={buttonDisabled}
                     className="btn btn-primary"
                     value="Next &#x2192;" onClick={e => this.handleNext(e)} />
                     <br/>

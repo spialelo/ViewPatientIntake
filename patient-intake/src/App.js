@@ -5,8 +5,9 @@ import Home from './components/Home';
 import PatientInfo from './components/PatientInfo';
 import EmergencyContact from './components/EmergencyContact';
 import MedicalHistory from './components/MedicalHistory';
+import ConsentForm from './components/ConsentForm';
 import ReviewPage from './components/ReviewPage';
-import ThankYou from './components/ThankYou'
+import ThankYou from './components/ThankYou';
 import logo from './logo.svg';
 import './App.css';
 
@@ -56,6 +57,11 @@ export default function App() {
       exact
       path="/medical-history"
       component={MedicalHistory}
+    />
+    <Route
+      exact
+      path="/consent-form"
+      component={ConsentForm}
     />
     <Route
       exact

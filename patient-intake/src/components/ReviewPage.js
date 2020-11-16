@@ -1,7 +1,5 @@
 import React from 'react';
 import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
-// import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 
 class ReviewPage extends React.Component {
@@ -15,17 +13,52 @@ class ReviewPage extends React.Component {
         }
         
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.renderHistory = this.renderHistory.bind(this);
     }
     
     componentDidMount() {
         const prevState = this.props ? this.props.location.state : Object.assign({});
         Object.keys(prevState).forEach((key) => {
             if(Object.keys(prevState[key])) {
-                this.setState({[key]: Object.assign({}, prevState[key])});
+                this.setState({patient: Object.assign({}, prevState.patient, this.state.patient)});
             }
             this.setState({[key]: prevState[key]});
         });
     }
+    
+        
+    renderHistory(type) {
+      // code
+      const currPatient = this.state.patient;
+      let typeHistory = {};
+      let stringHistory = '';
+
+      for (const [key] of Object.entries(currPatient)) {
+        if(key.match(type) && (currPatient[key] === '0' || currPatient[key] === '1')) {
+          typeHistory[key] = currPatient[key];
+        }
+      }
+      
+      for (const [key] of Object.entries(currPatient)) {
+        if(typeHistory[key] === '1') {
+          let x = key.replace(/_/g, ' ');
+            stringHistory += `${x}, `;
+          }
+      }
+      
+      // Above not elegant. Revisit & refactor later.
+  
+      const replaceTxt = type;
+      stringHistory = stringHistory.replaceAll(replaceTxt, "");
+      stringHistory = stringHistory.replace(/,\s*$/, "");
+      
+
+      return(
+        <span>{stringHistory.length > 0 ? stringHistory : 'N/A'}</span>
+        );
+      
+    }
+    
     
     handleSubmit(e) {
         e.preventDefault();
@@ -36,13 +69,11 @@ class ReviewPage extends React.Component {
         
         // Private info/keys isn .env for safekeeping and added to .gitignore
         prepData.Token = process.env.REACT_APP_GROUP5_TOKEN;
-        // prepData.Type = process.env.REACT_APP_TYPE_SPIE; // Only patient information
-        prepData.Type = process.env.REACT_APP_TYPE_SPPIMHFHIE; //All field in one post
+        prepData.Type = process.env.REACT_APP_TYPE_SPPIMHFHRFVIE // All field in one post
 
         
         const jsonPrepData = JSON.stringify(prepData);
         const proxy = 'https://cors-anywhere.herokuapp.com/'; // Address CORS Access-Control-Allow-Origin issue
-        // const url = process.env.REACT_APP_API_PATH;
         const url = 'https://web.njit.edu/~as2757/ControlPatientIntake/api.php';
         const proxyPlusURL = proxy+url
 
@@ -94,7 +125,11 @@ class ReviewPage extends React.Component {
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
-                <li className="breadcrumb-item"><Link to="/review-page">Review Information</Link></li>
+                <li className="breadcrumb-item">
+                  <Router>
+                    <Link to="/review-page">Review Information</Link>
+                  </Router>
+                </li>
               </ol>
             </nav>
             </header>
@@ -172,14 +207,13 @@ class ReviewPage extends React.Component {
                 <br/>
                 
               <h3>Reason For Visit</h3>
-              <br/>
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
                         <label htmlFor="staticReasonVisit" className="col-sm-2 col-form-label">Reason for visit</label>
                         <textarea className="form-control" rows="3"
                         readOnly
                         id="staticReasonVisit"
-                        value={currState.patient_reason_for_visit ? currState.patient_reason_for_visit : 'N/A'}
+                        value={currState.reason_for_visit ? currState.reason_for_visit : 'N/A'}
                         />
                     </div>
                 </div>
@@ -243,30 +277,30 @@ class ReviewPage extends React.Component {
               
               <h3>Medical History</h3>  
               <div className="form-group row">
-                <label htmlFor="staticPatientMedHistory" className="col-sm-2 col-form-label">Patient Medical History: </label>
-                <div className="col-sm-10">
-                  <p id="staticPatientMedHistory">Create method to iterate of over the boolean values and printing the ones that are true in a string list.</p>
+                <label htmlFor="staticPatientMedHistory" className="col-sm-3">Patient Medical History: </label>
+                <div className="col-sm-8">
+                  <p id="staticPatientMedHistory">{this.renderHistory('patient')}</p>
                 </div>
               </div>
               <div className="form-group row">
-                <label htmlFor="staticFamilyMedHistory" className="col-sm-2 col-form-label">Family Medical History: </label>
-                <div className="col-sm-10">
-                  <p id="staticFamilyMedHistory">Create method to iterate of over the boolean values and printing the ones that are true in a string list.</p>
+                <label htmlFor="staticFamilyMedHistory" className="col-sm-3">Family Medical History: </label>
+                <div className="col-sm-8">
+                  <p id="staticFamilyMedHistory">{this.renderHistory('family')}</p>
                 </div>
               </div>
               
 
                <h3>Signed Consent Form</h3> 
               {/*<div className="form-group row">
-                <label htmlFor="staticInsurID" className="col-sm-2 col-form-label">Insureance ID Number: </label>
+                <label htmlFor="staticConsentSign" className="col-sm-2 col-form-label">Signature: </label>
                 <div className="col-sm-10">
-                  <input type="text" readOnly className="form-control" id="staticInsurID" value={currState.hipaa_signature ? currState.hipaa_signature : 'N/A'} />
+                  <input type="text" readOnly className="form-control" id="staticConsentSign" value={currState.consent_signature ? currState.consent_signature : 'N/A'} />
                 </div>
               </div>
               <div className="form-group row">
-                <label htmlFor="staticEmergCont" className="col-sm-2 col-form-label">Emergency Contact: </label>
+                <label htmlFor="staticConsentDate" className="col-sm-2 col-form-label">Date Signed: </label>
                 <div className="col-sm-10">
-                  <input type="text" readOnly className="form-control" id="staticEmergCont" value={currState.hipaa_sign_date ? currState.hipaa_sign_date : 'N/A'} />
+                  <input type="text" readOnly className="form-control" id="staticConsentDate" value={currState.consent_date ? currState.consent_date : 'N/A'} />
                 </div>
               </div>*/}
               
@@ -276,6 +310,8 @@ class ReviewPage extends React.Component {
               <div className="col-sm-10">
                     <input type="submit" className="btn btn-primary" value="Submit 	&#x21EA;" onClick={e => this.handleSubmit(e)} />
                 </div>
+                <br/>
+                <br/>
             </form>
             </main>
             </div>

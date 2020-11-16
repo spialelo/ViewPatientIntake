@@ -1,6 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { HashRouter as Router, Link, withRouter } from 'react-router-dom';
 
 class EmergencyContact extends React.Component {
     
@@ -9,7 +8,8 @@ class EmergencyContact extends React.Component {
         
         this.state = {
             patient: {},
-            errors: {}
+            errors: {},
+            buttonDisabled: true
         }
         
         this.handleChange = this.handleChange.bind(this);
@@ -42,19 +42,17 @@ class EmergencyContact extends React.Component {
       const key = inputTarget.name;
       
       switch (key) {
-          case 'patient_reason_for_visit':
-          // code
+          case 'reason_for_visit':
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 150) {
+          } else if (inputTarget.value !== '' && inputTarget.value.length > 7000) {
               errors[key] = "Maximum length of 150 characters.";
-          } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 150) {
+          } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 7000) {
               delete errors[key];
           }
           this.setState({errors});
           break;
         case 'patient_emergency_contact_name':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 64) {
@@ -65,7 +63,6 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'patient_emergency_contact_relationship':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
@@ -77,7 +74,6 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'patient_emergency_contact_number':
-          // code
           if(inputTarget.value === '') {
             errors[key] = "Field is required.";
           } else if (inputTarget.value !== '' && inputTarget.value.length > 10) {
@@ -89,10 +85,7 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'insurance_company_name':
-          // code
-          if(inputTarget.value === '') {
-            errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
+          if (inputTarget.value !== '' && inputTarget.value.length > 32) {
               errors[key] = "Maximum length of 32 characters.";
           } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 32) {
               delete errors[key];
@@ -101,10 +94,7 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'insurance_contact_number':
-          // code
-          if(inputTarget.value === '') {
-            errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 10) {
+          if (inputTarget.value !== '' && inputTarget.value.length > 10) {
               errors[key] = "Maximum length of 10 characters.";
           } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 10) {
               delete errors[key];
@@ -113,10 +103,7 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'patient_insurance_id':
-          // code
-          if(inputTarget.value === '') {
-            errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 9) {
+          if (inputTarget.value !== '' && inputTarget.value.length > 9) {
               errors[key] = "Maximum length of 9 characters.";
           } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 9) {
               delete errors[key];
@@ -125,10 +112,7 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'insurance_group_number':
-          // code
-          if(inputTarget.value === '') {
-            errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
+          if (inputTarget.value !== '' && inputTarget.value.length > 32) {
               errors[key] = "Maximum length of 32 characters.";
           } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 32) {
               delete errors[key];
@@ -137,10 +121,7 @@ class EmergencyContact extends React.Component {
           this.setState({errors});
           break;
         case 'insurance_plan_name':
-          // code
-          if(inputTarget.value === '') {
-            errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 32) {
+          if (inputTarget.value !== '' && inputTarget.value.length > 32) {
               errors[key] = "Maximum length of 32 characters.";
           } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 32) {
               delete errors[key];
@@ -152,22 +133,26 @@ class EmergencyContact extends React.Component {
           // code
       }
       
+      const { buttonDisabled } = this.state;
+      let newButtonState = (Object.keys(this.state.patient).length < 4 || Object.keys(this.state.errors).length > 0);
+      
+      this.setState({buttonDisabled: newButtonState});
+      
     }
 
     handleNext(e) {
         e.preventDefault();
-        const patientFile = this.state.patient;
-        // Pass this component's state onto the next component/fields for user to fill in
+        const finalState = this.state;
+        delete finalState["buttonDisabled"];
         this.props.history.push({ 
             pathname: '/medical-history',
-            // pathname: '/review-page',
-            state: this.state
+            state: finalState
         });
     }
     
     render () {
         
-        let errors = Object.keys(this.state.errors).length > 0;
+        let { buttonDisabled } = this.state;
         
         return (
             <div>
@@ -175,7 +160,11 @@ class EmergencyContact extends React.Component {
                 <nav className="fixed-top" aria-label="breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
-                    <li className="breadcrumb-item"><Link to="/emergency-contact">Emergency Contact & Insurance</Link></li>
+                    <li className="breadcrumb-item">
+                        <Router>
+                            <Link to="/emergency-contact">Emergency Contact & Insurance</Link>
+                        </Router>
+                    </li>
                   </ol>
                 </nav>
             </header>
@@ -190,16 +179,15 @@ class EmergencyContact extends React.Component {
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
                         <label>Reason for visit</label>
-                        <textarea className="form-control" rows="3" 
-                        name="patient_reason_for_visit"
-                        disabled
-                        value={this.state.patient_reason_for_visit}
+                        <textarea className="form-control" rows="3" maxLength="7000"
+                        name="reason_for_visit"
+                        value={this.state.reason_for_visit}
                          onChange={this.handleChange}
                          onBlur={this.handleValidation}
                         />
-                        {this.state.errors.patient_reason_for_visit && 
+                        {this.state.errors.reason_for_visit && 
                           <div className="invalid-feedback" style={{display: 'block'}}>
-                            {this.state.errors.patient_reason_for_visit}
+                            {this.state.errors.reason_for_visit}
                           </div>}
                     </div>
                 </div>
@@ -295,7 +283,7 @@ class EmergencyContact extends React.Component {
                           </div>}
                      </div>
                       <div className="col-md-6 mb-3">
-                      <label>Insurance ID#</label>
+                      <label className="col-form-label">Insurance ID#</label>
                       <input type="text" className="form-control" name="patient_insurance_id" 
                       placeholder="Insurance ID#" 
                       value={this.state.patient_insurance_id} 
@@ -344,7 +332,7 @@ class EmergencyContact extends React.Component {
                     <br/>
                     <input type="submit" 
                     className="btn btn-primary"
-                    disabled={errors}
+                    disabled={buttonDisabled}
                     value="Next &#x2192;" onClick={e => this.handleNext(e)} />
                     <br/>
                     <br/>

@@ -1,6 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { HashRouter as Router, Link, withRouter } from 'react-router-dom';
 
 class MedicalHistory extends React.Component {
     
@@ -11,26 +10,27 @@ class MedicalHistory extends React.Component {
             patient: {
               patient_allergies: '',
               insurance_pharmacy_network: '', // here until it is removed
-              patient_drinker: false,
-              patient_cancer: false,
-              patient_currently_pregnant: false,
-              patient_diabetes: false,
-              patient_drinker: false,
-              patient_high_blood_pressure: false,
-              patient_heart_disease: false,
-              patient_metal_implants: false,
-              patient_pacemaker: false,
-              patient_smoker: false,
-              family_bleeding_disorder: false,
-              family_cancer: false,
-              family_diabetes: false,
-              family_heart_conditions: false,
-              family_heart_disease: false,
-              family_high_blood_pressure: false,
-              family_sickle_cell_disease: false,
-              family_stroke: false
+              patient_drinker: '0',
+              patient_cancer: '0',
+              patient_currently_pregnant: '0',
+              patient_diabetes: '0',
+              patient_drinker: '0',
+              patient_high_blood_pressure: '0',
+              patient_heart_disease: '0',
+              patient_metal_implants: '0',
+              patient_pacemaker: '0',
+              patient_smoker: '0',
+              family_bleeding_disorder: '0',
+              family_cancer: '0',
+              family_diabetes: '0',
+              family_heart_conditions: '0',
+              family_heart_disease: '0',
+              family_high_blood_pressure: '0',
+              family_sickle_cell_disease: '0',
+              family_stroke: '0'
             },
-            errors: {}
+            errors: {},
+            buttonDisabled: false
         }
         
         this.handleChange = this.handleChange.bind(this);
@@ -39,7 +39,6 @@ class MedicalHistory extends React.Component {
     }
     
     componentDidMount() {
-        // temporarily commented out for testing
         const prevState = this.props ? this.props.location.state : Object.assign({});
         Object.keys(prevState).forEach((key) => {
             if(Object.keys(prevState[key])) {
@@ -52,7 +51,7 @@ class MedicalHistory extends React.Component {
     handleChange(e) {
         const patient = Object.assign({}, this.state.patient);
         const target = e.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const value = target.type === 'checkbox' ? target.checked ? '1' : '0' : target.value;
         const name = target.name;
         patient[name] = value;
         this.setState({patient});
@@ -64,8 +63,6 @@ class MedicalHistory extends React.Component {
       const key = inputTarget.name;
       switch (key) {
           case 'patient_reason_for_visit':
-          // code
-
             if (inputTarget.value !== '') {
               let allergies = inputTarget.value;
               
@@ -81,21 +78,26 @@ class MedicalHistory extends React.Component {
           //code
       }
       
+      const { buttonDisabled } = this.state;
+      let newButtonState = (Object.keys(this.state.patient).length < 13 || Object.keys(this.state.errors).length > 0);
+      
+      this.setState({buttonDisabled: newButtonState});
+      
     }
 
     handleNext(e) {
         e.preventDefault();
-        const patientFile = this.state.patient;
-        // Pass this component's state onto the next component/fields for user to fill in
+        const finalState = this.state;
+        delete finalState["buttonDisabled"];
         this.props.history.push({ 
-            pathname: '/review-page',
-            state: this.state
+            pathname: '/consent-form',
+            state: finalState
         });
     }
     
     render () {
         
-        let errors = Object.keys(this.state.errors).length > 0;
+        let { buttonDisabled } = this.state;
         
         return (
             <div>
@@ -103,7 +105,11 @@ class MedicalHistory extends React.Component {
                 <nav className="fixed-top" aria-label="breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
-                    <li className="breadcrumb-item"><Link to="/medical-history">Medical History</Link></li>
+                    <li className="breadcrumb-item">
+                      <Router>
+                        <Link to="/medical-history">Medical History</Link>
+                      </Router>  
+                    </li>
                   </ol>
                 </nav>
             </header>
@@ -147,6 +153,8 @@ class MedicalHistory extends React.Component {
                       <label className="form-check-label">Pacemaker</label>
                     </div>
                 </div>
+                <br/>
+                <br/>
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
                         <label>Allergies</label>
@@ -199,7 +207,7 @@ class MedicalHistory extends React.Component {
                     <br/>
                     <input type="submit" 
                     className="btn btn-primary"
-                    disabled={errors}
+                    disabled={buttonDisabled}
                     value="Next &#x2192;" onClick={e => this.handleNext(e)} />
                     <br/>
                     <br/>

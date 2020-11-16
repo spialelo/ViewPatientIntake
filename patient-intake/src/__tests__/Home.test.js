@@ -3,15 +3,15 @@ import { render,screen,cleanup, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import '@testing-library/jest-dom';
-//@testing-library/jest-dom
-import Home from './components/Home';
+import Home from '../components/Home';
 
+// REMINDER:
 // Nested components within a component will be difficult to test.
 // Test the nested component's functionality separately.
-describe('Testing features related to the Home component', () => {
+describe('Home Component', () => {
 
 
-    describe('Test homepage has welcome text present', () => {
+    describe('Test homepage has expected elements & text', () => {
         beforeEach(() => {
             const { getByText } = render(<Home />);
         });
@@ -20,15 +20,20 @@ describe('Testing features related to the Home component', () => {
             cleanup();
         });
         
-        test('Welcome text on screen', () => {
-          const headerElement = screen.getByText(/Welcome to Patient check-in/i);
+        test('Assert Welcome text on screen', () => {
+          const headerElement = screen.getByText(/Patient check-in/i);
           expect(headerElement).toBeInTheDocument();
         });
         
-        test.skip('Welcome text NOT on screen', () => {
-          const headerElement = screen.getByText(/Welcome to Patient check-in/i);
+        test('Assert Copyright in footer on homepage only, is present', () => {
+          const headerElement = screen.getByText(/Patient Intake 2020/i);
+          expect(headerElement).toBeInTheDocument();
+        });
+        
+        test('Assert Patient Information should not be present on the home page', () => {
+          const headerElement = screen.queryByText('Patient Information');
           expect(headerElement).not.toBeInTheDocument();
-          // should fail
+          
         });
         
         
@@ -52,27 +57,12 @@ describe('Testing features related to the Home component', () => {
         });
         
         
-        test('Button is on home page', () => {
+        test('Begin Check in Button is on home page', () => {
           const linkElement = screen.getByTestId('begin-button');
           expect(linkElement).toBeInTheDocument();
         });
         
-         test.skip('Button click', () => {
-          const linkElement = screen.queryByTestId('begin-button');
-          userEvent.click(linkElement, {button: 0});
-          
-          expect(screen.queryByText(/patient information/i)).toBeInTheDocument();
-          
-        //   const patientPage = await screen.getByText(/patient information/i);
-        //   expect(patientPage).toBeInTheDocument();
-        });
-        
-        
      });
 
   });
-
-// test if the click on button takes the user to expected page - url check
-// mock functions needed
-
 

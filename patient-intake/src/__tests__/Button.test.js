@@ -2,7 +2,7 @@ import React from 'react';
 import { render,screen,cleanup, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 //@testing-library/jest-dom
-import Button from './components/Button';
+import Button from '../components/Button';
 
 // Nested components within a component will be difficult to test.
 // Test the nested component's functionality separately.
