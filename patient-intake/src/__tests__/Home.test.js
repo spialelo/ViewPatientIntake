@@ -34,8 +34,6 @@ describe('Home Component', () => {
           const headerElement = screen.queryByText('Patient Information');
           expect(headerElement).not.toBeInTheDocument();
           
-           //expect(queryByText('i, robot')).not.toBeInTheDocument()
-          // should fail
         });
         
         

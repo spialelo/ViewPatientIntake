@@ -45,6 +45,8 @@ class ReviewPage extends React.Component {
             stringHistory += `${x}, `;
           }
       }
+      
+      // Above not elegant. Revisit & refactor later.
   
       const replaceTxt = type;
       stringHistory = stringHistory.replaceAll(replaceTxt, "");
