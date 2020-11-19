@@ -19,10 +19,16 @@ class PatientInfo extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleValidation = this.handleValidation.bind(this);
         this.handleNext = this.handleNext.bind(this);
+        this.validEmail = this.validEmail.bind(this);
     }
     
     componentDidMount() {
       // code
+    }
+    
+    
+    validEmail(str) {
+      return (/^([a-zA-Z0-9_\-\+\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/gi).test(str);
     }
     
     handleChange(e) {
@@ -35,9 +41,14 @@ class PatientInfo extends React.Component {
     }
     
     handleValidation(e) {
+      
       const inputTarget = e.target;
-      const errors = this.state.errors;
+      let errors = this.state.errors;
       const key = inputTarget.name;
+      const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
+      const pattern2 =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          
+      console.log("called on..." + key);
       
       switch (key) {
         case 'patient_first_name':
@@ -70,13 +81,13 @@ class PatientInfo extends React.Component {
           
           this.setState({errors});
           break;
-          case 'patient_emailid':
-          const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
-          if ((inputTarget.value !== '' && pattern.test(inputTarget.value) === false) || inputTarget.value.length > 64) {
+        case 'patient_emailid':
+          if (inputTarget.value !== '') {
+            if(!this.validEmail(inputTarget.value) || inputTarget.value.length > 64) {
                 errors[key] = "Not a valid email."
-            
-          } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 64 &&  (pattern.test(inputTarget.value) === true)) {
+            } else if (errors[key] && this.validEmail(inputTarget.value) && inputTarget.value.length <= 64) {
               delete errors[key];
+            }
           }
           
           this.setState({errors});
