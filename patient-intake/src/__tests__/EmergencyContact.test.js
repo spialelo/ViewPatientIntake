@@ -20,7 +20,7 @@ describe('EmergencyContact Component', () => {
         });
         
         
-        test('Assert Next button is disabled on initial screen render', async () => {
+        test('Assert Emergency Contact page renders & Next button is disabled on initial screen render', async () => {
             const history = createMemoryHistory();
             const state = {
                patient: {
@@ -49,6 +49,7 @@ describe('EmergencyContact Component', () => {
                     <EmergencyContact history={history} location={location2} />
                 );
             expect(getByRole('button' )).toHaveAttribute('disabled');
+            expect(screen.getByText("Emergency Contact & Insurance")).toBeInTheDocument();
         });
         
 
