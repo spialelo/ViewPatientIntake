@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Link, withRouter } from 'react-router-dom';
+import * as util from '../utils/helpers.js';
 
 class PatientInfo extends React.Component {
     
@@ -45,11 +46,7 @@ class PatientInfo extends React.Component {
       const inputTarget = e.target;
       let errors = this.state.errors;
       const key = inputTarget.name;
-      const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
-      const pattern2 =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          
-      console.log("called on..." + key);
-      
+
       switch (key) {
         case 'patient_first_name':
           if(inputTarget.value === '') {

@@ -23,7 +23,8 @@ describe('EmergencyContact Component', () => {
         test('Assert Next button is disabled on initial screen render', async () => {
             const history = createMemoryHistory();
             const state = {
-               patient: {"patient_middle_name":"crackle",
+               patient: {
+                "patient_middle_name":"crackle",
                 "patient_emailid":"ricekrispies@kelloggs.com",
                 "patient_address_line_2":"",
                 "patient_first_name":"snap",
