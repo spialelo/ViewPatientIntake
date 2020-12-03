@@ -8,6 +8,7 @@ class EmergencyContact extends React.Component {
         
         this.state = {
             patient: {},
+            reqEmerg: {},
             errors: {},
             buttonDisabled: true
         }
@@ -33,7 +34,11 @@ class EmergencyContact extends React.Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         patient[name] = value;
-        this.setState({patient});
+        this.setState({
+            patient: patient,
+            reqEmerg: patient
+            
+        });
     }
     
     handleValidation(e) {
@@ -134,7 +139,7 @@ class EmergencyContact extends React.Component {
       }
       
       const { buttonDisabled } = this.state;
-      let newButtonState = (Object.keys(this.state.patient).length < 4 || Object.keys(this.state.errors).length > 0);
+      let newButtonState = (Object.keys(this.state.reqEmerg).length < 4 || Object.keys(this.state.errors).length > 0);
       
       this.setState({buttonDisabled: newButtonState});
       
@@ -181,6 +186,7 @@ class EmergencyContact extends React.Component {
                         <label>Reason for visit</label>
                         <textarea className="form-control" rows="3" maxLength="7000"
                         name="reason_for_visit"
+                        data-testid="reason-for-visit"
                         value={this.state.reason_for_visit}
                          onChange={this.handleChange}
                          onBlur={this.handleValidation}
