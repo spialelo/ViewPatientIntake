@@ -13,6 +13,7 @@ describe('EmergencyContact Component', () => {
     
     describe('Test validation of input fields and button', () => {
         beforeEach(() => {
+            // investigate why beforeEach is not working when I place the render of component within in?
         });
         
         afterEach(() => {
@@ -52,7 +53,6 @@ describe('EmergencyContact Component', () => {
             expect(screen.getByText("Emergency Contact & Insurance")).toBeInTheDocument();
         });
         
-        // test reason for visit, insurance id, insurance group number
         test('Reason for visit textarea input should be present on EmergencyContact component/screen', async () => {
             const history = createMemoryHistory();
             const state = {
@@ -72,7 +72,6 @@ describe('EmergencyContact Component', () => {
                 "patient_zip_code":"78561"}
             };
             
-            // const location = createLocation('/emergency-contact');
             let location2 = {};
             location2.state = state;
             
@@ -108,7 +107,6 @@ describe('EmergencyContact Component', () => {
                 "patient_zip_code":"78561"}
             };
             
-            // const location = createLocation('/emergency-contact');
             let location2 = {};
             location2.state = state;
             
@@ -135,7 +133,7 @@ describe('EmergencyContact Component', () => {
         
         
         
-        test('Input <7000 characters should not trigger error', async () => {
+        test.skip('Input <7000 characters should not trigger error', async () => {
             const history = createMemoryHistory();
             const state = {
                patient: {
@@ -154,7 +152,6 @@ describe('EmergencyContact Component', () => {
                 "patient_zip_code":"78561"}
             };
             
-            // const location = createLocation('/emergency-contact');
             let location2 = {};
             location2.state = state;
             
@@ -170,6 +167,7 @@ describe('EmergencyContact Component', () => {
             reasonVisit.focus();
             fireEvent.change(reasonVisit, {target: {value: "Stomach ache with occasional sharp pains"}});
             reasonVisit.blur();
+            expect(reasonVisit.value).toBe("Stomach ache with occasional sharp pains");
 
             const sibling = reasonVisit.nextSibling;
             expect(sibling).toBeFalsy();
@@ -198,7 +196,6 @@ describe('EmergencyContact Component', () => {
                 "patient_zip_code":"78561"}
             };
             
-            // const location = createLocation('/emergency-contact');
             let location2 = {};
             location2.state = state;
             
@@ -209,8 +206,6 @@ describe('EmergencyContact Component', () => {
                 );
 
             const insurID = getByPlaceholderText("Insurance ID#");
-            // 9
-            // Group# - 32
             
             insurID.focus();
             insurID.blur();
@@ -241,7 +236,6 @@ describe('EmergencyContact Component', () => {
                 "patient_zip_code":"78561"}
             };
             
-            // const location = createLocation('/emergency-contact');
             let location2 = {};
             location2.state = state;
             
@@ -256,6 +250,7 @@ describe('EmergencyContact Component', () => {
             insurID.focus();
             fireEvent.change(insurID, {target: {value: "1234567890"}});
             insurID.blur();
+            expect(insurID.value).toBe("1234567890");
 
             const sibling = insurID.nextSibling;
             expect(sibling).toBeTruthy();
@@ -266,6 +261,48 @@ describe('EmergencyContact Component', () => {
             
         });
         
+        
+        test('Enter insurance id less than 9 characters, no error should display', async () => {
+            const history = createMemoryHistory();
+            const state = {
+               patient: {
+                "patient_middle_name":"crackle",
+                "patient_emailid":"ricekrispies@kelloggs.com",
+                "patient_address_line_2":"",
+                "patient_first_name":"snap",
+                "patient_last_name":"pop",
+                "patient_contact_number":"74655966",
+                "patient_sex":"M",
+                "patient_ssn":"726596595",
+                "patient_dob":"1980-10-01",
+                "patient_address_line_1":"2 Lane Drive",
+                "patient_address_city":"Somewheresville",
+                "patient_address_state":"NE",
+                "patient_zip_code":"78561"}
+            };
+            
+
+            let location2 = {};
+            location2.state = state;
+            
+            history.push("/emergency-contact", state);
+            
+            const { getByRole, getByTestId, getByText, getByPlaceholderText } = await render(
+                    <EmergencyContact history={history} location={location2} />
+                );
+
+            const insurID = getByPlaceholderText("Insurance ID#");
+            
+            insurID.focus();
+            fireEvent.change(insurID, {target: {value: "12345678"}});
+            insurID.blur();
+            expect(insurID.value).toBe("12345678");
+
+            const sibling = insurID.nextSibling;
+            expect(sibling).toBeFalsy();
+            expect(sibling).not.toBeInTheDocument();
+            
+        });
         
         
         test('Leaving insurance group number field blank should not trigger an error message', async () => {
@@ -287,7 +324,6 @@ describe('EmergencyContact Component', () => {
                 "patient_zip_code":"78561"}
             };
             
-            // const location = createLocation('/emergency-contact');
             let location2 = {};
             location2.state = state;
             
@@ -298,9 +334,7 @@ describe('EmergencyContact Component', () => {
                 );
 
             const groupNumb = getByPlaceholderText("Group#");
-            // 9
-            // Group# - 32
-            
+
             groupNumb.focus();
             groupNumb.blur();
 
@@ -330,7 +364,7 @@ describe('EmergencyContact Component', () => {
                 "patient_zip_code":"78561"}
             };
             
-            // const location = createLocation('/emergency-contact');
+
             let location2 = {};
             location2.state = state;
             
@@ -341,13 +375,12 @@ describe('EmergencyContact Component', () => {
                 );
 
             const groupNumb = getByPlaceholderText("Group#");
-            // 9
-            // Group# - 32
             
             groupNumb.focus();
             fireEvent.change(groupNumb, {target: {value: "1234567890123456789012345678901234567890"}});
             groupNumb.blur();
-
+            expect(groupNumb.value).toBe("1234567890123456789012345678901234567890");
+            
             const sibling = groupNumb.nextSibling;
             expect(sibling).toBeTruthy();
             expect(sibling).toBeVisible();
@@ -357,6 +390,47 @@ describe('EmergencyContact Component', () => {
             
         });
         
+
+        test('Enter group number <=32 characters trigger, an error message should not be displayed to the user', async () => {
+            const history = createMemoryHistory();
+            const state = {
+               patient: {
+                "patient_middle_name":"crackle",
+                "patient_emailid":"ricekrispies@kelloggs.com",
+                "patient_address_line_2":"",
+                "patient_first_name":"snap",
+                "patient_last_name":"pop",
+                "patient_contact_number":"74655966",
+                "patient_sex":"M",
+                "patient_ssn":"726596595",
+                "patient_dob":"1980-10-01",
+                "patient_address_line_1":"2 Lane Drive",
+                "patient_address_city":"Somewheresville",
+                "patient_address_state":"NE",
+                "patient_zip_code":"78561"}
+            };
+
+            let location2 = {};
+            location2.state = state;
+            
+            history.push("/emergency-contact", state);
+            
+            const { getByRole, getByTestId, getByText, getByPlaceholderText } = await render(
+                    <EmergencyContact history={history} location={location2} />
+                );
+
+            const groupNumb = getByPlaceholderText("Group#");
+
+            groupNumb.focus();
+            fireEvent.change(groupNumb, {target: {value: "12345678901234567890"}});
+            groupNumb.blur();
+            expect(groupNumb.value).toBe("12345678901234567890");
+            const sibling = groupNumb.nextSibling;
+            
+            expect(sibling).toBeFalsy();
+            expect(sibling).not.toBeInTheDocument();
+            
+        });
 
     });
     

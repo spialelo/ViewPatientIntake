@@ -184,7 +184,7 @@ describe('PatientInfo Component', () => {
     
     
     
-    describe('Test Phone Number, Email, & Gender Drop down', () => {
+    describe.skip('Test Phone Number, Email, & Gender Drop down', () => {
         beforeEach(() => {
         });
         
@@ -246,7 +246,7 @@ describe('PatientInfo Component', () => {
     });
     
     
-    describe('Test Date of Birth, State Selection, & zip code', () => {
+    describe.skip('Test Date of Birth, State Selection, & zip code', () => {
         beforeEach(() => {
         });
         
