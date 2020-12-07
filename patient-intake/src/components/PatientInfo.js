@@ -185,7 +185,7 @@ class PatientInfo extends React.Component {
         case 'patient_zip_code':
           if (inputTarget.value === '') {
             errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 5 && inputTarget.value.length < 5) {
+          } else if ((inputTarget.value !== '' && inputTarget.value.length > 5) || (inputTarget.value !== '' &&inputTarget.value.length < 5)) {
               errors[key] = "Zip code is made up of 5 characters.";
           } else if (errors[key] && (inputTarget.value === '' || inputTarget.value.length === 5)) {
               delete errors[key];
