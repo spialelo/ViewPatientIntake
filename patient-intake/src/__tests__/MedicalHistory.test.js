@@ -66,9 +66,7 @@ describe('Medical History Component', () => {
         // test patient_allergies => string with a max length of 128
         // test if comma separated list
         // test no error when the two above conditions are met
-        
-
-        test.skip('Assert Medical History page renders & Next button is disabled on initial screen render', async () => {
+        test('Assert entering allergies as a comma separated string is captured on Medical History screen/component', async () => {
             const history = createMemoryHistory();
             const state = {
                patient: {
@@ -116,15 +114,13 @@ describe('Medical History Component', () => {
             
             allergies.focus();
             fireEvent.change(allergies, {target: 
-                {value: "hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum varius duis at consectetur lorem donec massa sapien faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan in nisl nisi scelerisque eu ultrices vitae auctor eu augue ut lectus arcu bibendum"}});
+                {value: "ragweed, tree pollen, shellfish"}});
             allergies.blur();
-            expect(allergies.value).toBe("hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum varius duis at consectetur lorem donec massa sapien faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan in nisl nisi scelerisque eu ultrices vitae auctor eu augue ut lectus arcu bibendum");
+            expect(allergies.value).toBe("ragweed, tree pollen, shellfish");
             
             const sibling = allergies.nextSibling;
-            expect(sibling).toBeTruthy();
-            expect(sibling).toBeVisible();
-            expect(sibling).toBeInTheDocument();
-            expect(sibling).toHaveClass('invalid-feedback');
+            expect(sibling).toBeFalsy();
+            expect(sibling).not.toBeInTheDocument();
             // expect(sibling).toHaveTextContent('Maximum length of 128 characters.');
             
         });

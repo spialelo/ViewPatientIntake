@@ -184,7 +184,7 @@ describe('PatientInfo Component', () => {
     
     
     
-    describe.skip('Test Phone Number, Email, & Gender Drop down', () => {
+    describe('Test Phone Number, Email, & Gender Drop down', () => {
         beforeEach(() => {
         });
         
@@ -196,57 +196,16 @@ describe('PatientInfo Component', () => {
             const { getByRole, queryByPlaceholderText } = render(<PatientInfo />);
             const phoneNumInput = queryByPlaceholderText("Phone Number");
             phoneNumInput.focus();
-            fireEvent.change(phoneNumInput, {target: {value: "1234567890"}});
+            fireEvent.change(phoneNumInput, {target: {value: "7513942266"}});
             phoneNumInput.blur();
-            expect(phoneNumInput.value).toBe("1234567890");
+            expect(phoneNumInput.value).toBe("7513942266");
         });
         
-        
-        test('Assert Next button remained disabled because requirements are not met', () => {
-            const { getByRole, queryByPlaceholderText } = render(<PatientInfo />);
-            const phoneNumInput = queryByPlaceholderText("Phone Number");
-            phoneNumInput.focus();
-            fireEvent.change(phoneNumInput, {target: {value: "Christopher"}});
-            phoneNumInput.blur();
-            expect(phoneNumInput.value).toBe("Christopher");
-            expect(getByRole('button')).toHaveAttribute('disabled');
-        });
-        
-        
-        test('Assert leaving Phone number input field blank triggers error message rendering', () => {
-            const { getByRole, queryByPlaceholderText } = render(<PatientInfo />);
-            const phoneNumInput = queryByPlaceholderText("Phone Number");
-            phoneNumInput.focus();
-            phoneNumInput.blur();
-
-            expect(phoneNumInput.value).toBe("");
-            
-            const sibling = phoneNumInput.nextSibling;
-            expect(sibling).toBeVisible();
-            expect(sibling).toBeInTheDocument();
-            expect(sibling).toHaveClass('invalid-feedback');
-            expect(sibling).toHaveTextContent('Field is required.');
-        });
-        
-        test('Entering a long Phone number in input field should triggers error message rendering', () => {
-            const { getByRole, queryByPlaceholderText } = render(<PatientInfo />);
-            const phoneNumInput = queryByPlaceholderText("Phone Number");
-            
-            phoneNumInput.focus();
-            fireEvent.change(phoneNumInput, {target: {value: "12345678901"}});
-            phoneNumInput.blur();
-            expect(phoneNumInput.value).toBe("12345678901");
-            
-            const sibling = phoneNumInput.nextSibling;
-            expect(sibling).toBeVisible();
-            expect(sibling).toBeInTheDocument();
-            expect(sibling).toHaveClass('invalid-feedback');
-            expect(sibling).toHaveTextContent('Maximum length of 10 characters.');
-        });
+       
     });
     
     
-    describe.skip('Test Date of Birth, State Selection, & zip code', () => {
+    describe('Test Date of Birth, State Selection, & zip code', () => {
         beforeEach(() => {
         });
         
