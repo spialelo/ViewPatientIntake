@@ -3,10 +3,10 @@ Front end view for Patient Intake interface for Medical Practice Management
 
 # Group 5 - Patient Intake
 Roster:   
-Front End, User stories: Nicole  
+Front End (Development + Tests), User Stories: Nicole  
 API: Akassh  
-Database Access: Karan, Sai
-User Stories, Wireframes/graphics, report: Vibhu
+Database Access, Report: Karan, Sai  
+User Stories, Wireframes/graphics, Report: Vibhu  
 Product Owner: Shared by all members
 
 # API
