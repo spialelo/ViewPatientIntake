@@ -305,7 +305,7 @@ class EmergencyContact extends React.Component {
                         <label className="col-form-label">
                           Insurance Plan Name:
                          </label>
-                         <input type="tel" className="form-control" 
+                         <input type="text" className="form-control" 
                          name="insurance_plan_name" 
                          placeholder="Plan/Policy Name" 
                          value={this.state.insurance_plan_name} 
