@@ -89,8 +89,6 @@ class ReviewPage extends React.Component {
           data: prepData
         })
           .then(res => {
-            console.log("---> response.data");
-            console.log(res.data);
             if(res.status === 200) {
               
               this.setState({

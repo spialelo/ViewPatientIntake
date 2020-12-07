@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Link, withRouter } from 'react-router-dom';
+import * as util from '../utils/helpers.js';
 
 class PatientInfo extends React.Component {
     
@@ -19,10 +20,16 @@ class PatientInfo extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleValidation = this.handleValidation.bind(this);
         this.handleNext = this.handleNext.bind(this);
+        this.validEmail = this.validEmail.bind(this);
     }
     
     componentDidMount() {
       // code
+    }
+    
+    
+    validEmail(str) {
+      return (/^([a-zA-Z0-9_\-\+\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/gi).test(str);
     }
     
     handleChange(e) {
@@ -35,10 +42,11 @@ class PatientInfo extends React.Component {
     }
     
     handleValidation(e) {
-      const inputTarget = e.target;
-      const errors = this.state.errors;
-      const key = inputTarget.name;
       
+      const inputTarget = e.target;
+      let errors = this.state.errors;
+      const key = inputTarget.name;
+
       switch (key) {
         case 'patient_first_name':
           if(inputTarget.value === '') {
@@ -70,13 +78,13 @@ class PatientInfo extends React.Component {
           
           this.setState({errors});
           break;
-          case 'patient_emailid':
-          const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
-          if ((inputTarget.value !== '' && pattern.test(inputTarget.value) === false) || inputTarget.value.length > 64) {
+        case 'patient_emailid':
+          if (inputTarget.value !== '') {
+            if(!this.validEmail(inputTarget.value) || inputTarget.value.length > 64) {
                 errors[key] = "Not a valid email."
-            
-          } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.length <= 64 &&  (pattern.test(inputTarget.value) === true)) {
+            } else if (errors[key] && this.validEmail(inputTarget.value) && inputTarget.value.length <= 64) {
               delete errors[key];
+            }
           }
           
           this.setState({errors});
@@ -177,7 +185,7 @@ class PatientInfo extends React.Component {
         case 'patient_zip_code':
           if (inputTarget.value === '') {
             errors[key] = "Field is required.";
-          } else if (inputTarget.value !== '' && inputTarget.value.length > 5 && inputTarget.value.length < 5) {
+          } else if ((inputTarget.value !== '' && inputTarget.value.length > 5) || (inputTarget.value !== '' &&inputTarget.value.length < 5)) {
               errors[key] = "Zip code is made up of 5 characters.";
           } else if (errors[key] && (inputTarget.value === '' || inputTarget.value.length === 5)) {
               delete errors[key];

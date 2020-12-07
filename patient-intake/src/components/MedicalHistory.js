@@ -68,6 +68,8 @@ class MedicalHistory extends React.Component {
               
               if(allergies.indexOf(',') < 0 && allergies.split(',').length < 1) {
                   errors[key] = "Please provide a comma separated list of allergies the patient has.";
+              } else if ((allergies.indexOf(',') >= 0 && allergies.split(',').length >= 1) && (allergies.length > 128)) {
+                  errors[key] = "Maximum length of 128 characters.";
               }
             } else if (errors[key] && inputTarget.value !== '' && inputTarget.value.indexOf(',') >= 0 && inputTarget.value.split(',').length >= 1) {
                 delete errors[key];
@@ -94,6 +96,7 @@ class MedicalHistory extends React.Component {
             state: finalState
         });
     }
+    
     
     render () {
         
@@ -160,6 +163,7 @@ class MedicalHistory extends React.Component {
                         <label>Allergies</label>
                         <textarea className="form-control" rows="3" 
                         name="patient_allergies"
+                        data-testid="patient-allergies"
                         value={this.state.patient_allergies}
                          onChange={this.handleChange}
                          onBlur={this.handleValidation}

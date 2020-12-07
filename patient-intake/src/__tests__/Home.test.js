@@ -31,7 +31,7 @@ describe('Home Component', () => {
         });
         
         test('Assert Patient Information should not be present on the home page', () => {
-          const headerElement = screen.queryByText('Patient Information');
+          const headerElement = screen.queryByText('Home / Patient Information');
           expect(headerElement).not.toBeInTheDocument();
           
         });
